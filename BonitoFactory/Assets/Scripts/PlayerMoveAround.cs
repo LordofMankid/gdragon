@@ -35,6 +35,12 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
 
+	public bool isP1 = true;
+	public bool isP2 = false;
+	public bool isP3 = false;
+	public bool isP4 = false;
+
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -65,8 +71,28 @@ public class PlayerMovement : MonoBehaviour
 
     private void MyInput()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
+
+		if (isP1){
+			horizontalInput = Input.GetAxisRaw("P1_Horizontal");
+        	verticalInput = Input.GetAxisRaw("P1_Vertical");
+		}
+		else if (isP2){
+			horizontalInput = Input.GetAxisRaw("P2_Horizontal");
+        	verticalInput = Input.GetAxisRaw("P2_Vertical");
+		}
+		else if (isP3){
+			horizontalInput = Input.GetAxisRaw("P3_Horizontal");
+        	verticalInput = Input.GetAxisRaw("P3_Vertical");
+		}
+		else if (isP4){
+			horizontalInput = Input.GetAxisRaw("P4_Horizontal");
+        	verticalInput = Input.GetAxisRaw("P4_Vertical");
+		}
+		else {
+			Debug.Log("no player assigned for inputs");
+		}
+
+
 
         // when to jump
         if (Input.GetKey(jumpKey) && readyToJump && grounded)
