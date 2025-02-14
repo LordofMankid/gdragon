@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 ﻿{
     "files.exclude":
     {
@@ -52,4 +53,8 @@
         "temp/":true,
         "Temp/":true
     }
+=======
+{
+    "dotnet.preferCSharpExtension": true
+>>>>>>> Stashed changes
 }
