@@ -3,12 +3,11 @@ using System.Collections;
 public class Player_Pickup : MonoBehaviour
 {
     public Transform PickUp_Hand; // The hand where the object will be held
-    private Transform PickUp_Object; // The object currently being held
+    public Transform PickUp_Object; // The object currently being held
     private Rigidbody PickUp_ObjectRigidbody; // Cached Rigidbody of the picked-up object
 
     public bool HasItem { get; private set; } = false; // Encapsulated field for better control
-    public float ThrowForce = 10f; // Force applied when throwing the object
-
+    public float ThrowForce = 12f; // Force applied when throwing the object
     private void Update()
     {
         HandlePickupInput();
@@ -54,7 +53,7 @@ public class Player_Pickup : MonoBehaviour
         }
     }
 
-    private void PickUp()
+    public void PickUp()
     {
         if (PickUp_Object == null) return;
 
@@ -83,7 +82,9 @@ public class Player_Pickup : MonoBehaviour
         if (PickUp_ObjectRigidbody != null)
         {
             PickUp_ObjectRigidbody.isKinematic = false;
+            PickUp_ObjectRigidbody.AddForce(transform.forward * 5, ForceMode.Impulse);
         }
+
 
         HasItem = false;
         PickUp_Object = null;
@@ -94,22 +95,37 @@ public class Player_Pickup : MonoBehaviour
     {
         if (PickUp_Object == null) return;
 
-        Drop(); // Drop the object first
+        // Detach the object from the hand
+        PickUp_Object.parent = null;
 
-        // Apply throw force
+        // Re-enable physics and apply stronger throw force
         if (PickUp_ObjectRigidbody != null)
         {
+            PickUp_ObjectRigidbody.isKinematic = false;
             PickUp_ObjectRigidbody.AddForce(transform.forward * ThrowForce, ForceMode.Impulse);
         }
 
         // Optionally, add logic to make the object pickable by other players
-        StartCoroutine(MakeObjectPickableAfterDelay(PickUp_Object));
+        //StartCoroutine(MakeObjectPickableAfterDelay(PickUp_Object));
+        ThrowableLogic thrownObject = PickUp_Object.GetComponent<ThrowableLogic>();
+        if (thrownObject != null)
+        {
+            thrownObject.OnThrown();
+        }
+        HasItem = false;
+        PickUp_Object = null;
+        PickUp_ObjectRigidbody = null;
     }
 
     private IEnumerator MakeObjectPickableAfterDelay(Transform thrownObject)
     {
         // Disable pickup for a short time to avoid immediate re-pickup
         thrownObject.tag = "Untagged"; // Temporarily remove the "PickUp" tag
+        bool hasCollidedWithFloor = false;
+        //while (!hasCollidedWithFloor)
+        //{
+        //    if()
+        //}
         yield return new WaitForSeconds(0.5f); // Adjust delay as needed
         thrownObject.tag = "PickUp"; // Re-enable pickup
     }
