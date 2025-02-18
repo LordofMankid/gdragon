@@ -14,6 +14,7 @@ TagManager:
   - Camera_P3
   - Camera_P4
   - PickUp
+  - Pointer_FishAuction
   layers:
   - Default
   - TransparentFX
