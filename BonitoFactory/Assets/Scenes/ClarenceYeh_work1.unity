@@ -604,6 +604,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 45, y: -135, z: 0}
+--- !u!114 &618972024 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 896794428656805608, guid: c255e523e228949db8a0b985d0a9abde,
+    type: 3}
+  m_PrefabInstance: {fileID: 1609871931}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f5c63808d2c64b059fa222500f1c154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &710047814 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8536081018548511569, guid: f91926a7f71a54ddd9efb000dcf3b309,
@@ -1126,6 +1138,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4550689511620824518, guid: f91926a7f71a54ddd9efb000dcf3b309,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 618972024}
+    - target: {fileID: 4550689511620824518, guid: f91926a7f71a54ddd9efb000dcf3b309,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 6110661304997506600, guid: f91926a7f71a54ddd9efb000dcf3b309,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 618972024}
+    - target: {fileID: 6110661304997506600, guid: f91926a7f71a54ddd9efb000dcf3b309,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Restart
+      objectReference: {fileID: 0}
+    - target: {fileID: 7836716460363498605, guid: f91926a7f71a54ddd9efb000dcf3b309,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 618972024}
+    - target: {fileID: 7836716460363498605, guid: f91926a7f71a54ddd9efb000dcf3b309,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Resume
       objectReference: {fileID: 0}
     - target: {fileID: 8536081018548511569, guid: f91926a7f71a54ddd9efb000dcf3b309,
         type: 3}
