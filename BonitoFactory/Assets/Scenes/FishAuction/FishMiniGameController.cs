@@ -1,10 +1,14 @@
 using UnityEngine;
 using System.Collections;
 using TMPro;
+using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
+using Unity.VisualScripting;
 
 public class GameController : MonoBehaviour
 {
     protected bool isGameActive = false; // Track if the game is currently active
+    private GameHandler gameHandler;
 
     public virtual void StartGame()
     {
@@ -13,12 +17,18 @@ public class GameController : MonoBehaviour
         // Additional logic to initialize the game state
     }
 
-    public virtual void StopGame()
+    public virtual void StopGame(int score)
     {
         isGameActive = false;
         Time.timeScale = 0; // Stops all scripts
+        StopAllCoroutines();
         // Consider using a GameState
-        Debug.Log("Game stopped.");
+        gameHandler = gameObject.GetComponent<GameHandler>();
+        if(gameHandler != null )
+        {
+            gameHandler.money = score;
+            SceneManager.LoadScene("Level1");
+        }
         // Additional logic to handle game stopping
     }
 
@@ -74,6 +84,10 @@ public class FishMiniGameController : GameController
 
     void Update()
     {
+        if (LeftMarker == null || RightMarker == null || Fish_LeftEdge == null || Fish_RightEdge == null || ProgressBarContainer == null)
+        {
+            return; // Exit the Update method if any Transform is destroyed
+        }
         // Move the pointer towards the target position
         transform.position = Vector3.MoveTowards(transform.position, new Vector3(targetX, transform.position.y, transform.position.z), moveSpeed * Time.deltaTime);
 

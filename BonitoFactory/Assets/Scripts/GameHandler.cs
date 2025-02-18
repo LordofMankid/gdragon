@@ -8,16 +8,38 @@ public class GameHandler : MonoBehaviour
 {
     public static int playerHealth; // Player health
     public static int StartPlayerHealth = 100; // Default starting health
-    public AudioMixer mixer; // Audio mixer for volume control
+    //public AudioMixer mixer; // Audio mixer for volume control
     public static float volumeLevel = 1.0f; // Stores current volume level
+    public static GameHandler Instance; // Singleton instance
+    public int money = 0;
+
+    private void Awake()
+    {
+        // Ensure only one instance of GameManager exists
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // Make the GameManager persistent
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void StartMinigame()
+    {
+        Debug.Log("Minigame started!");
+        // Add your minigame logic here
+        SceneManager.LoadScene("FishAuctionMinigame");
+    }
+
 
     void Start()
     {
         // Initialize the game state
         playerHealth = StartPlayerHealth;
 
-        // Ensure the audio level is set correctly at the start
-        SetLevel(volumeLevel);
     }
 
     // Restart the current level
@@ -53,13 +75,6 @@ public class GameHandler : MonoBehaviour
         #else
         Application.Quit(); // Quit the application
         #endif
-    }
-
-    // Adjust game volume using UI Slider
-    public void SetLevel(float sliderValue)
-    {
-        mixer.SetFloat("MusicVolume", Mathf.Log10(sliderValue) * 20); // Adjust volume
-        volumeLevel = sliderValue; // Store volume level
     }
 
     // Resets all necessary static variables when starting a new game
