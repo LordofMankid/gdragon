@@ -3,22 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Ground
-  - Player1
-  - Player2
-  - Player3
-  - Player4
-  - Camera_P1
-  - Camera_P2
-  - Camera_P3
-  - Camera_P4
-  - PickUp
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - whatIsGround
+  - 
   - Water
   - UI
   - 
