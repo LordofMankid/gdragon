@@ -8,6 +8,8 @@ public class Player_Pickup : MonoBehaviour
 
     public bool HasItem { get; private set; } = false; // Encapsulated field for better control
     public float ThrowForce = 12f; // Force applied when throwing the object
+
+    public bool IsAiming { get; private set; } = false; // tracks when player is aiming
     private void Update()
     {
         HandlePickupInput();
@@ -31,7 +33,15 @@ public class Player_Pickup : MonoBehaviour
 
     private void HandleThrowInput()
     {
-        if (HasItem && Input.GetKeyDown(KeyCode.Q)) // Use 'Q' for throwing
+        if (HasItem && Input.GetKey(KeyCode.Q))
+        {
+            IsAiming = true;
+        } else
+        {
+            IsAiming = false;
+        }
+
+        if (HasItem && Input.GetKeyUp(KeyCode.Q)) // Use 'Q' for throwing
         {
             Throw();
         }
@@ -102,7 +112,9 @@ public class Player_Pickup : MonoBehaviour
         if (PickUp_ObjectRigidbody != null)
         {
             PickUp_ObjectRigidbody.isKinematic = false;
-            PickUp_ObjectRigidbody.AddForce(transform.forward * ThrowForce, ForceMode.Impulse);
+            float upwardForceRatio = 0.2f;
+            Vector3 throwDirection = transform.forward + Vector3.up * upwardForceRatio;
+            PickUp_ObjectRigidbody.AddForce(throwDirection * ThrowForce, ForceMode.Impulse);
         }
 
         // Optionally, add logic to make the object pickable by other players
