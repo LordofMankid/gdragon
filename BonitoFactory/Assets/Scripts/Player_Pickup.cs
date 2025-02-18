@@ -1,61 +1,116 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+using System.Collections;
 public class Player_Pickup : MonoBehaviour
 {
+    public Transform PickUp_Hand; // The hand where the object will be held
+    private Transform PickUp_Object; // The object currently being held
+    private Rigidbody PickUp_ObjectRigidbody; // Cached Rigidbody of the picked-up object
 
-	public Transform PickUp_Hand;
-	private Transform PickUp_Object;
+    public bool HasItem { get; private set; } = false; // Encapsulated field for better control
+    public float ThrowForce = 10f; // Force applied when throwing the object
 
-	public bool hasItem = false;
-	public bool canPickup = false;
-	public float throwAmt = 0.5f;
-
-    // Start is called before the first frame update
-    void Update()
+    private void Update()
     {
-        if ((!hasItem)&&(canPickup)&&(Input.GetKeyDown("e"))){
-			PickUp();
-			hasItem=true;
-			canPickup = false;
-		}
-		else if ((hasItem)&&(Input.GetKeyDown("e"))){
-			DropIt();
-		}
+        HandlePickupInput();
+        HandleThrowInput();
     }
 
-    // Update is called once per frame
-    void OnTriggerEnter(Collider other)
+    private void HandlePickupInput()
     {
-        if (other.gameObject.tag == "PickUp"){
-			canPickup = true;
-			PickUp_Object = other.gameObject.transform;
-		}
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (!HasItem && PickUp_Object != null)
+            {
+                PickUp();
+            }
+            else if (HasItem)
+            {
+                Drop();
+            }
+        }
     }
 
-    void OnTriggerExit(Collider other)
+    private void HandleThrowInput()
     {
-        if (other.gameObject.tag == "PickUp"){
-			canPickup = false;
-			if (!hasItem){
-				PickUp_Object = null;
-			}
-		}
+        if (HasItem && Input.GetKeyDown(KeyCode.Q)) // Use 'Q' for throwing
+        {
+            Throw();
+        }
     }
 
-	public void PickUp(){
-		PickUp_Object.position = PickUp_Hand.position;
-		PickUp_Object.parent = PickUp_Hand;
-		PickUp_Object.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-	} 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("PickUp") && !HasItem)
+        {
+            PickUp_Object = other.transform;
+        }
+    }
 
-	public void DropIt(){
-		PickUp_Object.parent = null;
-		hasItem=false;
-		PickUp_Object.gameObject.GetComponent<Rigidbody>().isKinematic = false;
-		PickUp_Object.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * throwAmt, ForceMode.Impulse);
-		PickUp_Object = null;
-	} 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("PickUp") && !HasItem)
+        {
+            PickUp_Object = null;
+        }
+    }
 
+    private void PickUp()
+    {
+        if (PickUp_Object == null) return;
+
+        // Attach the object to the hand
+        PickUp_Object.position = PickUp_Hand.position;
+        PickUp_Object.parent = PickUp_Hand;
+
+        // Disable physics while holding the object
+        PickUp_ObjectRigidbody = PickUp_Object.GetComponent<Rigidbody>();
+        if (PickUp_ObjectRigidbody != null)
+        {
+            PickUp_ObjectRigidbody.isKinematic = true;
+        }
+
+        HasItem = true;
+    }
+
+    private void Drop()
+    {
+        if (PickUp_Object == null) return;
+
+        // Detach the object from the hand
+        PickUp_Object.parent = null;
+
+        // Re-enable physics
+        if (PickUp_ObjectRigidbody != null)
+        {
+            PickUp_ObjectRigidbody.isKinematic = false;
+        }
+
+        HasItem = false;
+        PickUp_Object = null;
+        PickUp_ObjectRigidbody = null;
+    }
+
+    private void Throw()
+    {
+        if (PickUp_Object == null) return;
+
+        Drop(); // Drop the object first
+
+        // Apply throw force
+        if (PickUp_ObjectRigidbody != null)
+        {
+            PickUp_ObjectRigidbody.AddForce(transform.forward * ThrowForce, ForceMode.Impulse);
+        }
+
+        // Optionally, add logic to make the object pickable by other players
+        StartCoroutine(MakeObjectPickableAfterDelay(PickUp_Object));
+    }
+
+    private IEnumerator MakeObjectPickableAfterDelay(Transform thrownObject)
+    {
+        // Disable pickup for a short time to avoid immediate re-pickup
+        thrownObject.tag = "Untagged"; // Temporarily remove the "PickUp" tag
+        yield return new WaitForSeconds(0.5f); // Adjust delay as needed
+        thrownObject.tag = "PickUp"; // Re-enable pickup
+    }
 }
