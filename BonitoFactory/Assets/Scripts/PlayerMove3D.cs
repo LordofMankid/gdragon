@@ -71,8 +71,13 @@ public class PlayerMove3D : MonoBehaviour {
             float targetAngle = Mathf.Atan2(direct.x, direct.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            rb.MovePosition(transform.position + moveDir * speed * Time.deltaTime);
+
+			Player_Pickup pickup = gameObject.GetComponent<Player_Pickup>();
+			if (pickup != null && pickup.IsAiming == false)
+			{
+                Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+                rb.MovePosition(transform.position + moveDir * speed * Time.deltaTime);
+            }
         }
 		else {
 			GetComponent<Rigidbody>().velocity = Vector3.zero; 
