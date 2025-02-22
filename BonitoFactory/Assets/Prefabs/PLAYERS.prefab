@@ -159,12 +159,12 @@ PrefabInstance:
     - target: {fileID: 3005266308582491923, guid: 27745bbd9b4dd3e4bb0694cc9bd10413,
         type: 3}
       propertyPath: offset.z
-      value: -8.25
+      value: 8.25
       objectReference: {fileID: 0}
     - target: {fileID: 3005266308582491923, guid: 27745bbd9b4dd3e4bb0694cc9bd10413,
         type: 3}
       propertyPath: smoother
-      value: 10
+      value: 7.5
       objectReference: {fileID: 0}
     - target: {fileID: 3005266308582491923, guid: 27745bbd9b4dd3e4bb0694cc9bd10413,
         type: 3}
