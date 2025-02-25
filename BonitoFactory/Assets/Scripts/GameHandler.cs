@@ -15,6 +15,12 @@ public class GameHandler : MonoBehaviour
         SetLevel(volumeLevel);
     }
 
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+
     public void StartGame()
     {
         Time.timeScale = 1;
