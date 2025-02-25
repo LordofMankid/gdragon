@@ -27,6 +27,24 @@ public class GameHandler : MonoBehaviour
         }
     }
 
+    public void StartGame()
+    {
+        Debug.Log("Game started!");
+        SceneManager.LoadScene("Level1");
+    }
+
+    public void ReturnToMainMenu()
+    {
+        Debug.Log("Returning to Main Menu");
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void RollCredits()
+    {
+        Debug.Log("Rolling Credits");
+        SceneManager.LoadScene("Credits");
+    }
+
     public void StartMinigame()
     {
         Debug.Log("Minigame started!");
@@ -70,11 +88,11 @@ public class GameHandler : MonoBehaviour
     {
         Time.timeScale = 1f; // Reset game time
 
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false; // Stop game in editor
-        #else
+#else
         Application.Quit(); // Quit the application
-        #endif
+#endif
     }
 
     // Resets all necessary static variables when starting a new game

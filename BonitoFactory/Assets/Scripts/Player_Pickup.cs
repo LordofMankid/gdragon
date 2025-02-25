@@ -36,7 +36,8 @@ public class Player_Pickup : MonoBehaviour
         if (HasItem && Input.GetKey(KeyCode.Q))
         {
             IsAiming = true;
-        } else
+        }
+        else
         {
             IsAiming = false;
         }
@@ -133,11 +134,6 @@ public class Player_Pickup : MonoBehaviour
     {
         // Disable pickup for a short time to avoid immediate re-pickup
         thrownObject.tag = "Untagged"; // Temporarily remove the "PickUp" tag
-        bool hasCollidedWithFloor = false;
-        //while (!hasCollidedWithFloor)
-        //{
-        //    if()
-        //}
         yield return new WaitForSeconds(0.5f); // Adjust delay as needed
         thrownObject.tag = "PickUp"; // Re-enable pickup
     }
