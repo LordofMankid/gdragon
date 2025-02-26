@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< Updated upstream:BonitoFactory/Assets/Scripts/CurrencyManager.cs.meta
 guid: 67baa7cd2610c4faf88891760a934f7a
+========
+guid: 58e054b12d41ed34dbd7dbde041fe973
+>>>>>>>> Stashed changes:BonitoFactory/Assets/Scripts/Teleporter.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
