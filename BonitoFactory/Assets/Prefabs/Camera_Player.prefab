@@ -33,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &6897580057165916883
 Camera:
@@ -65,7 +65,7 @@ Camera:
     x: 0
     y: 0
     width: 1
-    height: 1
+    height: 0.5
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -150,6 +150,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33302dcb624cec34f84e8eae63ad1fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoother: 5
-  offset: {x: 0, y: 0, z: 0}
+  smoother: 7.5
+  offset: {x: 7.5, y: 0, z: 7.5}
   playerName: Player1
+  cache:
+  - X
+  - Z

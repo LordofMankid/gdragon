@@ -13,13 +13,13 @@ public class ThrowableLogic : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
     }
+
     public void OnThrown()
     {
         IsThrown = true;
         IsGrounded = false;
         gameObject.tag = "Untagged"; // Temporarily disable pickup
     }
-
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -34,7 +34,6 @@ public class ThrowableLogic : MonoBehaviour
             AutoPickup();
             IsThrown = false;
         }
-
     }
 
     public void AutoPickup()

@@ -6,14 +6,38 @@ public class Player_Pickup : MonoBehaviour
     public Transform PickUp_Object; // The object currently being held
     private Rigidbody PickUp_ObjectRigidbody; // Cached Rigidbody of the picked-up object
 
+    public GameObject Popup;
+
     public bool HasItem { get; private set; } = false; // Encapsulated field for better control
     public float ThrowForce = 12f; // Force applied when throwing the object
 
     public bool IsAiming { get; private set; } = false; // tracks when player is aiming
+
+    private void Awake()
+    {
+        if (Popup != null)
+        {
+            Popup.SetActive(false); // Hide popup by default
+        }
+    }
+
     private void Update()
     {
         HandlePickupInput();
         HandleThrowInput();
+    }
+
+    void ShowPopup()
+    {
+        // Vector3 popupPosition = PickUp_Object.position + new Vector3(-4, 1, 3); // Adjust xDelta and zDelta as needed
+        // Popup.transform.position = popupPosition; // Set the Popup position
+        // Popup.transform.SetParent(PickUp_Object); // Set Popup as a child of the PickUp_Object
+        Popup.SetActive(true);
+    }
+
+    void HidePopup()
+    {
+        Popup.SetActive(false);
     }
 
     private void HandlePickupInput()
@@ -22,6 +46,7 @@ public class Player_Pickup : MonoBehaviour
         {
             if (!HasItem && PickUp_Object != null)
             {
+                HidePopup();
                 PickUp();
             }
             else if (HasItem)
@@ -36,12 +61,13 @@ public class Player_Pickup : MonoBehaviour
         if (HasItem && Input.GetKey(KeyCode.Q))
         {
             IsAiming = true;
-        } else
+        }
+        else
         {
             IsAiming = false;
         }
 
-        if (HasItem && Input.GetKeyUp(KeyCode.Q)) // Use 'Q' for throwing
+        if (HasItem && Input.GetKeyUp(KeyCode.Q))
         {
             Throw();
         }
@@ -51,7 +77,9 @@ public class Player_Pickup : MonoBehaviour
     {
         if (other.CompareTag("PickUp") && !HasItem)
         {
+
             PickUp_Object = other.transform;
+            ShowPopup();
         }
     }
 
@@ -59,6 +87,7 @@ public class Player_Pickup : MonoBehaviour
     {
         if (other.CompareTag("PickUp") && !HasItem)
         {
+            HidePopup();
             PickUp_Object = null;
         }
     }
@@ -133,11 +162,6 @@ public class Player_Pickup : MonoBehaviour
     {
         // Disable pickup for a short time to avoid immediate re-pickup
         thrownObject.tag = "Untagged"; // Temporarily remove the "PickUp" tag
-        bool hasCollidedWithFloor = false;
-        //while (!hasCollidedWithFloor)
-        //{
-        //    if()
-        //}
         yield return new WaitForSeconds(0.5f); // Adjust delay as needed
         thrownObject.tag = "PickUp"; // Re-enable pickup
     }

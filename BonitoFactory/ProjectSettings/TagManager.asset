@@ -12,6 +12,8 @@ TagManager:
   - PauseMenuSlider
   - Pointer_FishAuction
   - PauseMenu
+  - Ground
+  - Teleport
   layers:
   - Default
   - TransparentFX
