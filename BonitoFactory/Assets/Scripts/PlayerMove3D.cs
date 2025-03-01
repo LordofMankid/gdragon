@@ -6,7 +6,7 @@ public class PlayerMove3D : MonoBehaviour
 {
 	//Animator anim;
 	Rigidbody rb;
-	public Transform cam;
+	//public Transform cam;
 
 	public float speed = 6f;
 	public float turnSmoothTime = 0.1f;
@@ -29,11 +29,11 @@ public class PlayerMove3D : MonoBehaviour
 
 		if (isP1)
 		{
-			cam = GameObject.FindWithTag("Camera_P1").GetComponent<Transform>();
+			//cam = GameObject.FindWithTag("Camera_P1").GetComponent<Transform>();
 		}
 		else if (isP2)
 		{
-			cam = GameObject.FindWithTag("Camera_P2").GetComponent<Transform>();
+			//cam = GameObject.FindWithTag("Camera_P2").GetComponent<Transform>();
 		}
 		else
 		{
@@ -67,7 +67,7 @@ public class PlayerMove3D : MonoBehaviour
 
 		if (direct.magnitude >= 0.1f)
 		{
-			float targetAngle = Mathf.Atan2(direct.x, direct.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+			float targetAngle = Mathf.Atan2(direct.x, direct.z) * Mathf.Rad2Deg;
 			float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
 			transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
