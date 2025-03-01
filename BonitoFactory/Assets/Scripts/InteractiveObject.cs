@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class InteractiveObject : MonoBehaviour
 {
-    public Sprite popupSprite;
+    public Sprite PopupSprite;
+    public Transform PopupObject;
+
     public bool inTriggerRange = false;
 
     private void OnTriggerEnter(Collider other)
@@ -12,31 +14,38 @@ public class InteractiveObject : MonoBehaviour
         if (other.CompareTag("Player1") || other.CompareTag("Player2")) // Ensure Player1 has the tag "Player"
         {
             GameObject player = other.gameObject;
-            Transform popupIcon = player.transform.Find("PopupIcon");
+            PopupObject = player.transform.Find("PopupIcon");
 
-            int popupIconLength = popupIcon.childCount;
-            // Debug.Log("PopupIcon has " + popupIconLength + " children.");
-
-            if (popupIcon != null)
+            int popupIconLength = PopupObject.childCount;
+            foreach (Transform child in PopupObject)
             {
-                foreach (Transform child in popupIcon)
+                if (child.CompareTag("PopupImagePlaceholder"))
                 {
-                    if (child.CompareTag("PopupImagePlaceholder"))
+                    SpriteRenderer spriteRenderer = child.GetComponent<SpriteRenderer>();
+                    if (spriteRenderer != null)
                     {
-                        // Debug.Log("Found placeholder object");
-                        SpriteRenderer spriteRenderer = child.GetComponent<SpriteRenderer>();
-                        if (spriteRenderer != null)
-                        {
-                            spriteRenderer.sprite = popupSprite;
-                        }
+                        spriteRenderer.sprite = PopupSprite;
                     }
                 }
             }
+            ShowPopup();
         }
     }
 
     void OnTriggerExit(Collider other)
     {
         inTriggerRange = false;
+        HidePopup();
     }
+
+    void ShowPopup()
+    {
+        PopupObject.gameObject.SetActive(true);
+    }
+
+    void HidePopup()
+    {
+        PopupObject.gameObject.SetActive(false);
+    }
+
 }

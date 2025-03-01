@@ -56,9 +56,9 @@ public class Teleporter : MonoBehaviour
                 Debug.Log("M Key Pressed");
                 StartCoroutine(Teleport(MarketTeleporter));
             }
-            else if (Input.GetKeyDown(KeyCode.T) && gameObject.CompareTag("Teleporter-Market"))
+            else if (Input.GetKeyDown(KeyCode.H) && gameObject.CompareTag("Teleporter-Market"))
             {
-                Debug.Log("T Key Pressed");
+                Debug.Log("H Key Pressed");
                 StartCoroutine(Teleport(HomeTeleporter));
             }
         }
