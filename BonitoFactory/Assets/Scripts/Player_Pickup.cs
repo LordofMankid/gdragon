@@ -12,7 +12,7 @@ public class Player_Pickup : MonoBehaviour
     public float ThrowForce = 12f; // Force applied when throwing the object
 
     public bool IsAiming { get; private set; } = false; // tracks when player is aiming
-
+    private bool canInteract = true;
     private void Awake()
     {
         if (Popup != null)
@@ -42,15 +42,18 @@ public class Player_Pickup : MonoBehaviour
 
     private void HandlePickupInput()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && canInteract)
         {
+
             if (!HasItem && PickUp_Object != null)
             {
                 HidePopup();
                 PickUp();
+
             }
             else if (HasItem)
             {
+                Debug.Log("dropping");
                 Drop();
             }
         }
@@ -158,11 +161,12 @@ public class Player_Pickup : MonoBehaviour
         PickUp_ObjectRigidbody = null;
     }
 
-    private IEnumerator MakeObjectPickableAfterDelay(Transform thrownObject)
+    public IEnumerator StartInteractionCooldown()
     {
-        // Disable pickup for a short time to avoid immediate re-pickup
-        thrownObject.tag = "Untagged"; // Temporarily remove the "PickUp" tag
-        yield return new WaitForSeconds(0.5f); // Adjust delay as needed
-        thrownObject.tag = "PickUp"; // Re-enable pickup
+        canInteract= false;
+        yield return new WaitForSeconds(0.2f); // Small delay to prevent instant dropping
+        canInteract= true;
     }
+
+
 }
