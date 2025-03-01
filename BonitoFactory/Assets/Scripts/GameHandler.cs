@@ -12,6 +12,7 @@ public class GameHandler : MonoBehaviour
     public static float volumeLevel = 1.0f; // Stores current volume level
     public static GameHandler Instance; // Singleton instance
     public int money = 0;
+    public GameObject deliveryPrefab;
 
     private void Awake()
     {
@@ -53,6 +54,27 @@ public class GameHandler : MonoBehaviour
         SceneManager.LoadScene("FishAuctionMinigame");
     }
 
+    /* adjust the number of fish or you can pass in money and convert in GameHandler conversion instead, as long as 
+     * you pass in a number of fish into the setFishCount function
+     * 
+     */
+    public void DeliverFish(int fishCount)
+    {
+        if (deliveryPrefab == null)
+        {
+            Debug.LogError("Delivery Prefab is missing!");
+            return;
+        }
+
+        // spawn the box
+        GameObject box = Instantiate(deliveryPrefab);
+
+        DeliveryBox deliveryBox = box.GetComponent<DeliveryBox>();
+        if (deliveryBox != null)
+        {
+            deliveryBox.SetFishCount(fishCount);
+        }
+    }
     void Start()
     {
         SetLevel(volumeLevel);
