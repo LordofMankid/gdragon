@@ -17,6 +17,11 @@ TagManager:
   - PopupImagePlaceholder
   - Teleporter-Home
   - Teleporter-Market
+  - Target_FishAuction
+  - Timer_FishAuction
+  - CurrentBid_FishAuction
+  - LeftMarker_FishAuction
+  - RightMarker_FishAuction
   layers:
   - Default
   - TransparentFX
