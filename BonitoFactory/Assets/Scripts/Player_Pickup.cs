@@ -13,32 +13,13 @@ public class Player_Pickup : MonoBehaviour
     private bool canInteract = true;
     private ProcessingStation nearbyStation = null; // Track the station in range
 
-    private void Awake()
-    {
-        if (Popup != null)
-        {
-            Popup.SetActive(false); // Hide popup by default
-        }
-    }
+
 
 
     private void Update()
     {
         HandlePickupInput();
         HandleThrowInput();
-    }
-
-    void ShowPopup()
-    {
-        // Vector3 popupPosition = PickUp_Object.position + new Vector3(-4, 1, 3); // Adjust xDelta and zDelta as needed
-        // Popup.transform.position = popupPosition; // Set the Popup position
-        // Popup.transform.SetParent(PickUp_Object); // Set Popup as a child of the PickUp_Object
-        Popup.SetActive(true);
-    }
-
-    void HidePopup()
-    {
-        Popup.SetActive(false);
     }
 
     private void HandlePickupInput()
@@ -88,12 +69,7 @@ public class Player_Pickup : MonoBehaviour
 
         ProcessingStation station = other.GetComponent<ProcessingStation>();
         if (station != null)
-        {
-            Debug.Log("entering station");
-            if(!station.processingItem)
-            {
-                ShowPopup(); // only popup interaction if it's not processing
-            }
+        {        
             nearbyStation = station;
         }
     }
@@ -107,7 +83,6 @@ public class Player_Pickup : MonoBehaviour
 
         if (other.GetComponent<ProcessingStation>() != null)
         {
-            HidePopup();
             nearbyStation = null;
         }
     }
