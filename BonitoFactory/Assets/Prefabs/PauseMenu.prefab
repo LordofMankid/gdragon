@@ -840,7 +840,7 @@ PrefabInstance:
     - target: {fileID: 2801673609598425003, guid: 21cd619207f29478689135f05a211435,
         type: 3}
       propertyPath: m_Name
-      value: button_Restart
+      value: Button_Restart
       objectReference: {fileID: 0}
     - target: {fileID: 2834636481192583945, guid: 21cd619207f29478689135f05a211435,
         type: 3}
@@ -995,7 +995,7 @@ PrefabInstance:
     - target: {fileID: 2801673609598425003, guid: 21cd619207f29478689135f05a211435,
         type: 3}
       propertyPath: m_Name
-      value: button_Resume
+      value: Button_Resume
       objectReference: {fileID: 0}
     - target: {fileID: 2834636481192583945, guid: 21cd619207f29478689135f05a211435,
         type: 3}
@@ -1145,7 +1145,7 @@ PrefabInstance:
     - target: {fileID: 1736675683412143654, guid: 21cd619207f29478689135f05a211435,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -186
+      value: -191.49
       objectReference: {fileID: 0}
     - target: {fileID: 1736675683412143654, guid: 21cd619207f29478689135f05a211435,
         type: 3}
@@ -1165,14 +1165,12 @@ PrefabInstance:
     - target: {fileID: 2801673609598425003, guid: 21cd619207f29478689135f05a211435,
         type: 3}
       propertyPath: m_Name
-      value: button_Quit
+      value: Button_Quit
       objectReference: {fileID: 0}
     - target: {fileID: 2834636481192583945, guid: 21cd619207f29478689135f05a211435,
         type: 3}
       propertyPath: m_Text
-      value: 'QUIT
-
-'
+      value: QUIT
       objectReference: {fileID: 0}
     - target: {fileID: 5552461093373560100, guid: 21cd619207f29478689135f05a211435,
         type: 3}

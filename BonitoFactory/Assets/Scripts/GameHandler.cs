@@ -6,10 +6,75 @@ using UnityEngine.SceneManagement;
 
 public class GameHandler : MonoBehaviour
 {
-    public static int playerHealth = 100;
-    public AudioMixer mixer;
-    public static float volumeLevel = 1.0f;
+    public static int playerHealth; // Player health
+    public static int StartPlayerHealth = 100; // Default starting health
+    // public AudioMixer mixer; // Audio mixer for volume control
+    public static float volumeLevel = 1.0f; // Stores current volume level
+    public static GameHandler Instance; // Singleton instance
+    public int money = 0;
+    public GameObject deliveryPrefab;
 
+    private void Awake()
+    {
+        // Ensure only one instance of GameManager exists
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // Make the GameManager persistent
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void StartGame()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Level1");
+        Debug.Log("Game started.");
+    }
+
+    public void ReturnToMainMenu()
+    {
+        Debug.Log("Returning to Main Menu");
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void RollCredits()
+    {
+        Debug.Log("Rolling Credits");
+        SceneManager.LoadScene("Credits");
+    }
+
+    public void StartMinigame()
+    {
+        Debug.Log("Minigame started!");
+        // Add your minigame logic here
+        SceneManager.LoadScene("FishAuctionMinigame");
+    }
+
+    /* adjust the number of fish or you can pass in money and convert in GameHandler conversion instead, as long as 
+     * you pass in a number of fish into the setFishCount function
+     * 
+     */
+    public void DeliverFish(int fishCount)
+    {
+        if (deliveryPrefab == null)
+        {
+            Debug.LogError("Delivery Prefab is missing!");
+            return;
+        }
+
+        // spawn the box
+        GameObject box = Instantiate(deliveryPrefab);
+
+        DeliveryBox deliveryBox = box.GetComponent<DeliveryBox>();
+        if (deliveryBox != null)
+        {
+            deliveryBox.SetFishCount(fishCount);
+        }
+    }
     void Start()
     {
         SetLevel(volumeLevel);
@@ -18,13 +83,6 @@ public class GameHandler : MonoBehaviour
     public void LoadMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
-    }
-
-
-    public void StartGame()
-    {
-        Time.timeScale = 1;
-        Debug.Log("Game started.");
     }
 
     public void StopGame()
@@ -41,17 +99,25 @@ public class GameHandler : MonoBehaviour
 
     public void QuitGame()
     {
-        Time.timeScale = 1f;
+        Time.timeScale = 1f; // Reset game time
+
 #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
+        UnityEditor.EditorApplication.isPlaying = false; // Stop game in editor
 #else
-        Application.Quit();
+        Application.Quit(); // Quit the application
 #endif
     }
 
     public void SetLevel(float sliderValue)
     {
-        mixer.SetFloat("MusicVolume", Mathf.Log10(sliderValue) * 20);
-        volumeLevel = sliderValue;
+        // mixer.SetFloat("MusicVolume", Mathf.Log10(sliderValue) * 20); // Adjust volume
+        volumeLevel = sliderValue; // Store volume level
+    }
+
+    // Resets all necessary static variables when starting a new game
+    private void ResetGameVariables()
+    {
+        playerHealth = StartPlayerHealth;
+        // Add other static variables that need resetting here
     }
 }

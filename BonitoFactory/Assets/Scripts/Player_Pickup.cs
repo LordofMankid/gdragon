@@ -10,6 +10,8 @@ public class Player_Pickup : MonoBehaviour
     public float ThrowForce = 12f; // Force applied when throwing the object
 
     public bool IsAiming { get; private set; } = false; // tracks when player is aiming
+    private bool canInteract = true;
+
     private void Update()
     {
         HandlePickupInput();
@@ -18,14 +20,17 @@ public class Player_Pickup : MonoBehaviour
 
     private void HandlePickupInput()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && canInteract)
         {
+
             if (!HasItem && PickUp_Object != null)
             {
                 PickUp();
+
             }
             else if (HasItem)
             {
+                Debug.Log("dropping");
                 Drop();
             }
         }
@@ -36,12 +41,13 @@ public class Player_Pickup : MonoBehaviour
         if (HasItem && Input.GetKey(KeyCode.Q))
         {
             IsAiming = true;
-        } else
+        }
+        else
         {
             IsAiming = false;
         }
 
-        if (HasItem && Input.GetKeyUp(KeyCode.Q)) // Use 'Q' for throwing
+        if (HasItem && Input.GetKeyUp(KeyCode.Q))
         {
             Throw();
         }
@@ -51,6 +57,7 @@ public class Player_Pickup : MonoBehaviour
     {
         if (other.CompareTag("PickUp") && !HasItem)
         {
+
             PickUp_Object = other.transform;
         }
     }
@@ -129,16 +136,12 @@ public class Player_Pickup : MonoBehaviour
         PickUp_ObjectRigidbody = null;
     }
 
-    private IEnumerator MakeObjectPickableAfterDelay(Transform thrownObject)
+    public IEnumerator StartInteractionCooldown()
     {
-        // Disable pickup for a short time to avoid immediate re-pickup
-        thrownObject.tag = "Untagged"; // Temporarily remove the "PickUp" tag
-        bool hasCollidedWithFloor = false;
-        //while (!hasCollidedWithFloor)
-        //{
-        //    if()
-        //}
-        yield return new WaitForSeconds(0.5f); // Adjust delay as needed
-        thrownObject.tag = "PickUp"; // Re-enable pickup
+        canInteract = false;
+        yield return new WaitForSeconds(0.2f); // Small delay to prevent instant dropping
+        canInteract = true;
     }
+
+
 }
