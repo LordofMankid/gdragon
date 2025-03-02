@@ -3,7 +3,7 @@ using TMPro;
 
 public class CurrencyManager : MonoBehaviour
 {
-    public int currentCurrency = 1000;
+    public int currentCurrency = 100;
     public TextMeshProUGUI currencyText;
 
     void Start()
