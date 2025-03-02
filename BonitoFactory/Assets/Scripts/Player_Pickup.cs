@@ -13,6 +13,9 @@ public class Player_Pickup : MonoBehaviour
 
     public bool IsAiming { get; private set; } = false; // tracks when player is aiming
     private bool canInteract = true;
+
+    private ProcessingStation nearbyStation = null; // Track the station in range
+
     private void Awake()
     {
         if (Popup != null)
@@ -40,25 +43,27 @@ public class Player_Pickup : MonoBehaviour
         Popup.SetActive(false);
     }
 
-    private void HandlePickupInput()
+ private void HandlePickupInput()
     {
         if (Input.GetKeyDown(KeyCode.E) && canInteract)
         {
-
-            if (!HasItem && PickUp_Object != null)
+            if (nearbyStation != null && HasItem && !nearbyStation.processingItem) 
+            {
+                Debug.Log("hi");
+                // Deposit item at the station instead of dropping
+                DepositToStation();
+            }
+            else if (!HasItem && PickUp_Object != null) 
             {
                 HidePopup();
                 PickUp();
-
             }
-            else if (HasItem)
+            else if (HasItem) 
             {
-                Debug.Log("dropping");
                 Drop();
             }
         }
     }
-
     private void HandleThrowInput()
     {
         if (HasItem && Input.GetKey(KeyCode.Q))
@@ -84,6 +89,17 @@ public class Player_Pickup : MonoBehaviour
             PickUp_Object = other.transform;
             ShowPopup();
         }
+
+        ProcessingStation station = other.GetComponent<ProcessingStation>();
+        if (station != null)
+        {
+            Debug.Log("entering station");
+            if(!station.processingItem)
+            {
+                ShowPopup(); // only popup interaction if it's not processing
+            }
+            nearbyStation = station;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -92,6 +108,12 @@ public class Player_Pickup : MonoBehaviour
         {
             HidePopup();
             PickUp_Object = null;
+        }
+
+        if (other.GetComponent<ProcessingStation>() != null)
+        {
+            HidePopup();
+            nearbyStation = null;
         }
     }
 
@@ -166,6 +188,17 @@ public class Player_Pickup : MonoBehaviour
         canInteract= false;
         yield return new WaitForSeconds(0.2f); // Small delay to prevent instant dropping
         canInteract= true;
+    }
+
+    private void DepositToStation()
+    {
+        if (nearbyStation != null && HasItem)
+        {
+            nearbyStation.ProcessItem(PickUp_Object.gameObject);
+            HasItem = false;
+            PickUp_Object = null;
+            PickUp_ObjectRigidbody = null;
+        }
     }
 
 
