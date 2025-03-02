@@ -9,9 +9,11 @@ public class FishMiniGameController : MonoBehaviour
 {
     // [SerializeField] bool disabled = false;
 
+    private bool gameOver;
+
     [Header("Movement Settings")]
     public float moveSpeed = 1.0f;
-    private float targetX;
+    [SerializeField] float targetX;
     private bool movingRight = true;
 
     [Header("Boundaries & Markers")]
@@ -34,6 +36,10 @@ public class FishMiniGameController : MonoBehaviour
     public TextMeshProUGUI moneyBalance;
     public bool deducted = false;
 
+    public GameObject EndGamePopup;
+    public GameObject ReplayButton;
+    public GameObject LeaveButton;
+
     [Header("Color Settings")]
     public Color highlightColor = Color.green;
     private Color originalColor;
@@ -43,17 +49,13 @@ public class FishMiniGameController : MonoBehaviour
 
     public float countdownTime = 10f;
 
-    private void Start()
+    private void Awake()
     {
         LeftMarker = GameObject.FindGameObjectWithTag("LeftMarker_FishAuction").transform;
         RightMarker = GameObject.FindGameObjectWithTag("RightMarker_FishAuction").transform;
 
-        if (LeftMarker == null || RightMarker == null)
-        {
-            Debug.LogError("One or more Transforms are not assigned in the Inspector!", this);
-        }
-
         targetX = RightMarker.position.x;
+        ProgressBarContainer = GameObject.FindGameObjectWithTag("ProgressBarContainer_FishAuction").transform;
         progressBarSpriteRenderer = ProgressBarContainer.GetComponentInChildren<SpriteRenderer>();
         originalColor = progressBarSpriteRenderer.color;
 
@@ -61,43 +63,92 @@ public class FishMiniGameController : MonoBehaviour
         timerText = GameObject.FindGameObjectWithTag("Timer_FishAuction").GetComponent<TextMeshProUGUI>();
         moneyBalance = GameObject.FindGameObjectWithTag("MoneyBalance").GetComponentInChildren<TextMeshProUGUI>();
         FishTarget = GameObject.FindGameObjectWithTag("Target_FishAuction").transform;
+        EndGamePopup = GameObject.FindGameObjectWithTag("EndGamePopup_FishAuction");
+        if (EndGamePopup == null)
+        {
+            Debug.LogError("EndGamePopup GameObject is missing. Please check the tag.");
+            return;
+        }
+
+        ReplayButton = GameObject.FindGameObjectWithTag("ReplayButton_FishAuction");
+        LeaveButton = GameObject.FindGameObjectWithTag("LeaveButton_FishAuction");
+
+        EndGamePopup.SetActive(false);
+        gameOver = false;
 
         moneyBalance.text = "1000"; // Temporary
+    }
 
+    void Start()
+    {
         StartCountdown();
     }
 
-    void Update()
+    private void Update()
     {
-        if (Time.timeScale > 0)
+        if (gameOver) return; // Stop updates when the game is over
+
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(targetX, transform.position.y, transform.position.z), moveSpeed * Time.deltaTime);
+
+        if (Mathf.Abs(transform.position.x - targetX) < 0.01f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(targetX, transform.position.y, transform.position.z), moveSpeed * Time.deltaTime);
-            if (Mathf.Abs(transform.position.x - targetX) < 0.01f)
-            {
-                movingRight = !movingRight;
-                targetX = movingRight ? RightMarker.position.x : LeftMarker.position.x;
-            }
-
-            // Correct layout
-            FishTarget_LeftEdge = FishTarget.position.x - (FishTarget.localScale.x / 2);
-            FishTarget_RightEdge = FishTarget.position.x + (FishTarget.localScale.x / 2);
-            withinBounds = transform.position.x >= FishTarget_LeftEdge && transform.position.x <= FishTarget_RightEdge;
-
-            HandleBidClick();
+            movingRight = !movingRight;
+            targetX = movingRight ? RightMarker.position.x : LeftMarker.position.x;
         }
-        else
+
+        FishTarget_LeftEdge = FishTarget.localPosition.x - 65f;
+        FishTarget_RightEdge = FishTarget.localPosition.x + 65f;
+        withinBounds = transform.localPosition.x >= FishTarget_LeftEdge && transform.localPosition.x <= FishTarget_RightEdge;
+
+        HandleBidClick();
+    }
+
+
+    private void EndGame()
+    {
+        if (!gameOver)
         {
+            gameOver = true;
+            StopAllCoroutines();
             DeductFromBalance();
+            ShowEndGamePopup();
         }
+    }
+
+    private void ShowEndGamePopup()
+    {
+        EndGamePopup.SetActive(true);
+        ReplayButton.GetComponent<Button>().onClick.AddListener(ResetGame);
+        LeaveButton.GetComponent<Button>().onClick.AddListener(LeaveGame);
+    }
+
+    private void ResetGame()
+    {
+        targetX = RightMarker.position.x;
+        movingRight = true;
+        isScaling = false;
+
+        currentPrice = 0;
+        currentPriceText.text = "Current Price: $0";
+        ProgressBarContainer.localScale = new Vector3(50, ProgressBarContainer.localScale.y, ProgressBarContainer.localScale.z);
+        EndGamePopup.SetActive(false);
+
+        timerText.text = "Timer: " + countdownTime + "s";
+        StartCountdown();
+        Time.timeScale = 1;
+        deducted = false;
+        gameOver = false;
+    }
+
+    private void LeaveGame()
+    {
+        Debug.Log("Leave Button was clicked");
     }
 
 
     public void StartCountdown()
     {
         StartCoroutine(CountdownCoroutine());
-        // Debug.Log("Finished Countdown : Updating Balance");
-        // DeductFromBalance();
-        // disabled = true;
     }
 
     private IEnumerator CountdownCoroutine()
@@ -111,7 +162,7 @@ public class FishMiniGameController : MonoBehaviour
         }
 
         timerText.text = "Timer: 0s";
-        Time.timeScale = 0;
+        EndGame();
     }
 
     void HandleBidClick()
@@ -121,7 +172,6 @@ public class FishMiniGameController : MonoBehaviour
             ProgressBarContainer.localScale += new Vector3(scaleAmount, 0, 0);
             StartCoroutine(ChangeColorTemporarily(highlightColor, 1.0f));
             RandomizeTargetPosition();
-            UpdateCurrentPrice();
         }
         else if (!isScaling)
         {
@@ -134,6 +184,7 @@ public class FishMiniGameController : MonoBehaviour
         float randomX = UnityEngine.Random.Range(LeftMarker.position.x, RightMarker.position.x);
         FishTarget.position = new Vector3(randomX, FishTarget.position.y, FishTarget.position.z);
     }
+
     private void UpdateCurrentPrice()
     {
         float localX = ProgressBarContainer.localScale.x;
@@ -170,6 +221,7 @@ public class FishMiniGameController : MonoBehaviour
         while (ProgressBarContainer.localScale.x > 0)
         {
             ProgressBarContainer.localScale -= new Vector3(descalingSpeed * Time.deltaTime, 0, 0);
+            UpdateCurrentPrice();
             yield return null;
         }
         isScaling = false;
