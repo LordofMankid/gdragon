@@ -6,14 +6,11 @@ public class Player_Pickup : MonoBehaviour
     public Transform PickUp_Object; // The object currently being held
     private Rigidbody PickUp_ObjectRigidbody; // Cached Rigidbody of the picked-up object
 
-    public GameObject Popup;
-
     public bool HasItem { get; private set; } = false; // Encapsulated field for better control
     public float ThrowForce = 12f; // Force applied when throwing the object
 
     public bool IsAiming { get; private set; } = false; // tracks when player is aiming
     private bool canInteract = true;
-
     private ProcessingStation nearbyStation = null; // Track the station in range
 
     private void Awake()
@@ -23,6 +20,7 @@ public class Player_Pickup : MonoBehaviour
             Popup.SetActive(false); // Hide popup by default
         }
     }
+
 
     private void Update()
     {
@@ -43,7 +41,7 @@ public class Player_Pickup : MonoBehaviour
         Popup.SetActive(false);
     }
 
- private void HandlePickupInput()
+    private void HandlePickupInput()
     {
         if (Input.GetKeyDown(KeyCode.E) && canInteract)
         {
@@ -55,7 +53,6 @@ public class Player_Pickup : MonoBehaviour
             }
             else if (!HasItem && PickUp_Object != null) 
             {
-                HidePopup();
                 PickUp();
             }
             else if (HasItem) 
@@ -87,7 +84,6 @@ public class Player_Pickup : MonoBehaviour
         {
 
             PickUp_Object = other.transform;
-            ShowPopup();
         }
 
         ProcessingStation station = other.GetComponent<ProcessingStation>();
@@ -106,7 +102,6 @@ public class Player_Pickup : MonoBehaviour
     {
         if (other.CompareTag("PickUp") && !HasItem)
         {
-            HidePopup();
             PickUp_Object = null;
         }
 
@@ -185,9 +180,9 @@ public class Player_Pickup : MonoBehaviour
 
     public IEnumerator StartInteractionCooldown()
     {
-        canInteract= false;
+        canInteract = false;
         yield return new WaitForSeconds(0.2f); // Small delay to prevent instant dropping
-        canInteract= true;
+        canInteract = true;
     }
 
     private void DepositToStation()

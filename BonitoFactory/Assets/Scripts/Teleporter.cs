@@ -1,48 +1,84 @@
-using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
+public class Teleporter : MonoBehaviour
+{
+    public GameObject playerController;
+    public Transform playerPosition;
+    public bool inTriggerRange = false;
 
-//This script goes onto the teleport object
-//The teleport object needs a BoxCollider2D set to isTrigger and a tag called "teleport"
-public class Teleporter : MonoBehaviour {
+    [SerializeField] Transform MarketTeleporter;
+    [SerializeField] Transform HomeTeleporter;
 
-       public Vector3 newPosition;
-       public GameObject[] allTeleporters;
+    void Awake()
+    {
+        if (gameObject.CompareTag("Teleporter-Home"))
+        {
+            HomeTeleporter = gameObject.transform;
+            MarketTeleporter = GameObject.FindGameObjectWithTag("Teleporter-Market").transform;
+        }
+        else
+        {
+            HomeTeleporter = GameObject.FindGameObjectWithTag("Teleporter-Home").transform;
+            MarketTeleporter = gameObject.transform;
+        }
+    }
 
-       public void OnTriggerEnter2D(Collider2D other){
-             if (other.gameObject.tag == "Player"){
-                 Vector3 playerPos = other.gameObject.transform.position;
-                 float DistToPlayer = Vector3.Distance(playerPos, transform.position);
+    void OnTriggerEnter(Collider other)
+    {
+        // Debug.Log("On Trigger Enter");
+        if (other.CompareTag("Player1") || other.CompareTag("Player2"))
+        {
+            inTriggerRange = true;
+            playerPosition = other.transform;
+            playerController = other.gameObject;
+        }
+    }
 
-           //to prevent teleporters from looping: set trigger colliders no smaller than 1x1
-                 if (DistToPlayer > 0.5f){
-                      GetNearest();
-                      other.gameObject.transform.position = newPosition;
-                 }
-             }
+    void OnTriggerExit(Collider other)
+    {
+        // Debug.Log("On Trigger Exit");
+        if (other.CompareTag("Player1") || other.CompareTag("Player2"))
+        {
+            inTriggerRange = false;
+            playerPosition = null;
+            playerController = null;
+        }
+    }
+
+    void Update()
+    {
+        if (inTriggerRange && playerPosition && playerController)
+        {
+            // Debug.Log("Player in teleport zone");
+            if (Input.GetKey(KeyCode.M) && gameObject.CompareTag("Teleporter-Home"))
+            {
+                Debug.Log("M Key Pressed");
+                StartCoroutine(Teleport(MarketTeleporter));
+            }
+            else if (Input.GetKeyDown(KeyCode.H) && gameObject.CompareTag("Teleporter-Market"))
+            {
+                Debug.Log("H Key Pressed");
+                StartCoroutine(Teleport(HomeTeleporter));
+            }
+        }
+    }
+
+    IEnumerator Teleport(Transform destination)
+    {
+        if (destination == null)
+        {
+            Debug.LogError("Teleport destination not found!");
+            yield break;
         }
 
-     public void GetNearest(){
-           //populate array with all teleporters except self
-           this.gameObject.tag = "Untagged"; //temporary tag
-           allTeleporters = GameObject.FindGameObjectsWithTag("Teleport");
-           this.gameObject.tag = "Teleport"; //change tag back
-
-           //test each array item for closest
-           Transform closestTarget = null;
-           float closestTargetSquare = Mathf.Infinity;
-           Vector3 thisPosition = transform.position;
-           for (int i = 0; i < allTeleporters.Length; i++){
-               Vector3 distanceToNewTarget = allTeleporters[i].transform.position - thisPosition;
-               float distanceSquareToNewTarget = distanceToNewTarget.sqrMagnitude;
-               if (distanceSquareToNewTarget < closestTargetSquare){
-                      closestTargetSquare = distanceSquareToNewTarget;
-                      closestTarget = allTeleporters[i].transform;
-               }
-           }
-          newPosition = closestTarget.position;
-      }
+        Debug.Log("Teleporting...");
+        GameObject popupField = playerController.transform.Find("PopupIcon").gameObject;
+        popupField.SetActive(false);
+        playerController.SetActive(false);
+        yield return null;
+        playerPosition.position = destination.position + new Vector3(5f, 0, 5f);
+        yield return null;
+        playerController.SetActive(true);
+    }
 }
-
-// "find nearest" adapted from:
-// https://forum.unity.com/threads/clean-est-way-to-find-nearest-object-of-many-c.44315/
