@@ -19,9 +19,9 @@ TagManager:
   - Teleporter-Market
   - Target_FishAuction
   - Timer_FishAuction
-  - CurrentBid_FishAuction
   - LeftMarker_FishAuction
   - RightMarker_FishAuction
+  - CurrentPrice_FishAuction
   layers:
   - Default
   - TransparentFX

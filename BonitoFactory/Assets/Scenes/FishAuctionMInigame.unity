@@ -1185,7 +1185,7 @@ MonoBehaviour:
   scaleAmount: 75
   descalingSpeed: 15
   timerText: {fileID: 1162367487}
-  currentBid: {fileID: 1263536426}
+  currentPrice: {fileID: 0}
   highlightColor: {r: 0.9131291, g: 1, b: 0, a: 1}
   countdownTime: 10
 --- !u!1 &482410785
@@ -1529,7 +1529,7 @@ MonoBehaviour:
   scaleAmount: 0.1
   descalingSpeed: 0.1
   timerText: {fileID: 0}
-  currentBid: {fileID: 0}
+  currentPrice: {fileID: 0}
   highlightColor: {r: 0, g: 1, b: 0, a: 1}
   countdownTime: 10
 --- !u!1 &582341211
@@ -2447,7 +2447,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 446.2, y: 5}
+  m_AnchoredPosition: {x: 396, y: 5}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1162367487
@@ -2470,7 +2470,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Timer: 0'
+  m_text: 'Timer: 0s'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2504,7 +2504,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -2560,7 +2560,7 @@ GameObject:
   - component: {fileID: 1263536426}
   m_Layer: 0
   m_Name: CurrentPrice
-  m_TagString: CurrentBid_FishAuction
+  m_TagString: CurrentPrice_FishAuction
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2582,7 +2582,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -411.31, y: 5}
+  m_AnchoredPosition: {x: -343.5, y: 5}
   m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1263536426
@@ -2605,7 +2605,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Current Price: $00'
+  m_text: 'Current Price: $0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2639,7 +2639,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -2825,7 +2825,7 @@ Transform:
   m_GameObject: {fileID: 1425152747}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
   m_LocalPosition: {x: -807, y: -458, z: 436.47696}
-  m_LocalScale: {x: 75, y: 623.53827, z: 623.53827}
+  m_LocalScale: {x: 48.76, y: 623.53827, z: 623.53827}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1886916181}
@@ -3151,7 +3151,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: $125
+  m_text: $130
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

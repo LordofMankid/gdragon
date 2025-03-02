@@ -6,12 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class GameHandler : MonoBehaviour
 {
-    public static int playerHealth; // Player health
-    public static int StartPlayerHealth = 100; // Default starting health
+    // public static int playerHealth; // Player health
+    // public static int StartPlayerHealth = 100; // Default starting health
     // public AudioMixer mixer; // Audio mixer for volume control
     public static float volumeLevel = 1.0f; // Stores current volume level
     public static GameHandler Instance; // Singleton instance
-    public int money = 0;
+    public GameObject moneyBalance;
+    public int startingBalance = 1000;
     public GameObject deliveryPrefab;
 
     private void Awake()
@@ -26,6 +27,8 @@ public class GameHandler : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        moneyBalance = GameObject.FindGameObjectWithTag("MoneyBalance");
     }
 
     public void StartGame()
@@ -117,7 +120,7 @@ public class GameHandler : MonoBehaviour
     // Resets all necessary static variables when starting a new game
     private void ResetGameVariables()
     {
-        playerHealth = StartPlayerHealth;
+        moneyBalance.GetComponent<TMPro.TextMeshProUGUI>().text = startingBalance.ToString();
         // Add other static variables that need resetting here
     }
 }

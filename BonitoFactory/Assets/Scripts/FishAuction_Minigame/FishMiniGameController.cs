@@ -3,9 +3,12 @@ using System.Collections;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using Unity.VisualScripting;
 
 public class FishMiniGameController : MonoBehaviour
 {
+    // [SerializeField] bool disabled = false;
+
     [Header("Movement Settings")]
     public float moveSpeed = 1.0f;
     private float targetX;
@@ -26,7 +29,10 @@ public class FishMiniGameController : MonoBehaviour
 
     [Header("UI References")]
     public TextMeshProUGUI timerText;
-    public TextMeshProUGUI currentPrice;
+    public TextMeshProUGUI currentPriceText;
+    public float currentPrice;
+    public TextMeshProUGUI moneyBalance;
+    public bool deducted = false;
 
     [Header("Color Settings")]
     public Color highlightColor = Color.green;
@@ -34,7 +40,6 @@ public class FishMiniGameController : MonoBehaviour
     private SpriteRenderer progressBarSpriteRenderer;
 
     private bool withinBounds;
-    private CurrencyManager currencyManager;
 
     public float countdownTime = 10f;
 
@@ -52,17 +57,47 @@ public class FishMiniGameController : MonoBehaviour
         progressBarSpriteRenderer = ProgressBarContainer.GetComponentInChildren<SpriteRenderer>();
         originalColor = progressBarSpriteRenderer.color;
 
-        // currencyManager = FindObjectOfType<CurrencyManager>();
-
-        currentPrice = GameObject.FindGameObjectWithTag("CurrentPrice_FishAuction").GetComponent<TextMeshProUGUI>();
+        currentPriceText = GameObject.FindGameObjectWithTag("CurrentPrice_FishAuction").GetComponent<TextMeshProUGUI>();
         timerText = GameObject.FindGameObjectWithTag("Timer_FishAuction").GetComponent<TextMeshProUGUI>();
+        moneyBalance = GameObject.FindGameObjectWithTag("MoneyBalance").GetComponentInChildren<TextMeshProUGUI>();
         FishTarget = GameObject.FindGameObjectWithTag("Target_FishAuction").transform;
+
+        moneyBalance.text = "1000"; // Temporary
+
         StartCountdown();
     }
+
+    void Update()
+    {
+        if (Time.timeScale > 0)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(targetX, transform.position.y, transform.position.z), moveSpeed * Time.deltaTime);
+            if (Mathf.Abs(transform.position.x - targetX) < 0.01f)
+            {
+                movingRight = !movingRight;
+                targetX = movingRight ? RightMarker.position.x : LeftMarker.position.x;
+            }
+
+            // Correct layout
+            FishTarget_LeftEdge = FishTarget.position.x - (FishTarget.localScale.x / 2);
+            FishTarget_RightEdge = FishTarget.position.x + (FishTarget.localScale.x / 2);
+            withinBounds = transform.position.x >= FishTarget_LeftEdge && transform.position.x <= FishTarget_RightEdge;
+
+            HandleBidClick();
+        }
+        else
+        {
+            DeductFromBalance();
+        }
+    }
+
 
     public void StartCountdown()
     {
         StartCoroutine(CountdownCoroutine());
+        // Debug.Log("Finished Countdown : Updating Balance");
+        // DeductFromBalance();
+        // disabled = true;
     }
 
     private IEnumerator CountdownCoroutine()
@@ -79,31 +114,14 @@ public class FishMiniGameController : MonoBehaviour
         Time.timeScale = 0;
     }
 
-    void Update()
-    {
-        if (Time.timeScale == 0) return;
-        transform.position = Vector3.MoveTowards(transform.position, new Vector3(targetX, transform.position.y, transform.position.z), moveSpeed * Time.deltaTime);
-        if (Mathf.Abs(transform.position.x - targetX) < 0.01f)
-        {
-            movingRight = !movingRight;
-            targetX = movingRight ? RightMarker.position.x : LeftMarker.position.x;
-        }
-        FishTarget_LeftEdge = FishTarget.position.x - (FishTarget.localScale.x / 2);
-        FishTarget_RightEdge = FishTarget.position.x + (FishTarget.localScale.x / 2);
-        withinBounds = transform.position.x >= FishTarget_LeftEdge && transform.position.x <= FishTarget_RightEdge;
-
-        ClickAction();
-    }
-
-    void ClickAction()
+    void HandleBidClick()
     {
         if (Input.GetMouseButtonDown(0) && withinBounds)
         {
             ProgressBarContainer.localScale += new Vector3(scaleAmount, 0, 0);
             StartCoroutine(ChangeColorTemporarily(highlightColor, 1.0f));
-            MoveFishMarker();
+            RandomizeTargetPosition();
             UpdateCurrentPrice();
-            // CheckMiniGameSuccess();
         }
         else if (!isScaling)
         {
@@ -111,25 +129,32 @@ public class FishMiniGameController : MonoBehaviour
         }
     }
 
-    private void MoveFishMarker()
+    private void RandomizeTargetPosition()
     {
         float randomX = UnityEngine.Random.Range(LeftMarker.position.x, RightMarker.position.x);
         FishTarget.position = new Vector3(randomX, FishTarget.position.y, FishTarget.position.z);
     }
     private void UpdateCurrentPrice()
     {
-        float localX = ProgressBarContainer.localScale.x; // Normalized progress (0 to 1)
-        // float startX = 21f;
-        // float endX = 621f;
-        // int startPrice = 200;
-        // int endPrice = 75;
-
-        // Interpolate from $200 to $75 based on the current x position
+        float localX = ProgressBarContainer.localScale.x;
         float price = 200f - (localX / 600f * 200f * 3 / 5);
         Debug.Log(localX / 600f);
-        currentPrice.text = "Current Price: $" + Mathf.Floor(price);
+        currentPrice = Mathf.Floor(price);
+        currentPriceText.text = "Current Price: $" + currentPrice;
 
-        Debug.Log(currentPrice.text);
+        Debug.Log(currentPriceText.text);
+    }
+
+    private void DeductFromBalance()
+    {
+        if (!deducted)
+        {
+            int currentBalance = int.Parse(moneyBalance.text);
+            int newBalance = (int)(currentBalance - currentPrice);
+            Debug.Log("New Balance: " + newBalance);
+            moneyBalance.text = newBalance.ToString();
+            deducted = true;
+        }
     }
 
     private IEnumerator ChangeColorTemporarily(Color newColor, float duration)
@@ -149,12 +174,4 @@ public class FishMiniGameController : MonoBehaviour
         }
         isScaling = false;
     }
-
-    // void CheckMiniGameSuccess()
-    // {
-    //     if (ProgressBarContainer.localScale.x >= 1)
-    //     {
-    //         currencyManager.DeductCurrency(Mathf.RoundToInt(ProgressBarContainer.localScale.x * 1));
-    //     }
-    // }
 }
