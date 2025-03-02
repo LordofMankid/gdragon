@@ -12,6 +12,7 @@ TagManager:
   - PauseMenuSlider
   - Pointer_FishAuction
   - PauseMenu
+  - Log
   layers:
   - Default
   - TransparentFX
