@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameHandler : MonoBehaviour
 {
     public static float volumeLevel = 1.0f; // Stores current volume level
     public static GameHandler Instance; // Singleton instance
-    public GameObject moneyBalance;
-    public int startingBalance = 1000;
+    public TextMeshProUGUI moneyBalance;
+    public TextMeshProUGUI deliveredFish;
     public GameObject deliveryPrefab;
+
+    public int startingBalance = 1000;
 
     private void Awake()
     {
@@ -25,7 +28,8 @@ public class GameHandler : MonoBehaviour
             Destroy(gameObject);
         }
 
-        moneyBalance = GameObject.FindGameObjectWithTag("MoneyBalance");
+        moneyBalance = GameObject.FindGameObjectWithTag("MoneyBalance").GetComponent<TextMeshProUGUI>();
+        deliveredFish = GameObject.FindGameObjectWithTag("DeliveryFish").GetComponent<TextMeshProUGUI>();
     }
 
     public void StartGame()
@@ -61,6 +65,8 @@ public class GameHandler : MonoBehaviour
 
         // spawn the box
         GameObject box = Instantiate(deliveryPrefab);
+        box.transform.position = new Vector3(65, 5, 100);
+        Rigidbody rb = box.AddComponent<Rigidbody>();
 
         DeliveryBox deliveryBox = box.GetComponent<DeliveryBox>();
         if (deliveryBox != null)
@@ -68,6 +74,29 @@ public class GameHandler : MonoBehaviour
             deliveryBox.SetFishCount(fishCount);
         }
     }
+
+    public void UpdateFishCounter(int newFishCount)
+    {
+        deliveredFish.text = newFishCount.ToString();
+    }
+
+    /*
+    *   Deduct from money balance
+    */
+    public void DeductFromBalance(float amount)
+    {
+        float newBalance = float.Parse(moneyBalance.text) - amount;
+        moneyBalance.text = newBalance.ToString();
+    }
+
+    /*
+    *   Read from money balance
+    */
+    public int GetBalance()
+    {
+        return int.Parse(moneyBalance.text);
+    }
+
     void Start()
     {
         SetLevel(volumeLevel);

@@ -27,8 +27,8 @@ public class FishMiniGameController : MonoBehaviour
     private bool isScaling = false;
 
     [Header("UI References")]
-    public TextMeshProUGUI MoneyBalance;
-    public TextMeshProUGUI DeliveryFish;
+    // public TextMeshProUGUI MoneyBalance;
+    // public TextMeshProUGUI DeliveryFish;
     public TextMeshProUGUI Timer;
     public TextMeshProUGUI currentPriceText;
     public float currentPrice;
@@ -56,6 +56,8 @@ public class FishMiniGameController : MonoBehaviour
 
     public GameObject InsufficientFunds;
 
+    private int fishCount = 0;
+
     private void Awake()
     {
         targetX = RightBound;
@@ -67,8 +69,8 @@ public class FishMiniGameController : MonoBehaviour
 
         currentPriceText = GameObject.FindGameObjectWithTag("CurrentPrice_FishAuction").GetComponent<TextMeshProUGUI>();
         Timer = GameObject.FindGameObjectWithTag("Timer_FishAuction").GetComponent<TextMeshProUGUI>();
-        MoneyBalance = GameObject.FindGameObjectWithTag("MoneyBalance").GetComponent<TextMeshProUGUI>();
-        DeliveryFish = GameObject.FindGameObjectWithTag("DeliveryFish").GetComponent<TextMeshProUGUI>();
+        // MoneyBalance = GameObject.FindGameObjectWithTag("MoneyBalance").GetComponent<TextMeshProUGUI>();
+        // DeliveryFish = GameObject.FindGameObjectWithTag("DeliveryFish").GetComponent<TextMeshProUGUI>();
         FishTarget = GameObject.FindGameObjectWithTag("Target_FishAuction").transform;
 
         StartGameBtn = GameObject.FindGameObjectWithTag("StartGameBtn_FishAuction");
@@ -129,6 +131,8 @@ public class FishMiniGameController : MonoBehaviour
     {
         // Handle fish logic
         Destroy(gameObject);
+        // Deliver that fish
+        GameHandler.Instance.DeliverFish(fishCount);
         Debug.Log("Exit Button was clicked");
     }
 
@@ -151,7 +155,7 @@ public class FishMiniGameController : MonoBehaviour
 
     private void CheckBalance()
     {
-        if (int.Parse(MoneyBalance.text) < 200)
+        if (GameHandler.Instance.GetBalance() < 200)
         {
             StartGameBtn.GetComponent<Button>().interactable = false;
             PlayAgainBtn.GetComponent<Button>().interactable = false;
@@ -162,8 +166,8 @@ public class FishMiniGameController : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Update is running");
-        Debug.Log("Gameover: " + gameOver);
+        // Debug.Log("Update is running");
+        // Debug.Log("Gameover: " + gameOver);
 
         if (gameOver) return;
 
@@ -174,7 +178,7 @@ public class FishMiniGameController : MonoBehaviour
             targetX = movingRight ? RightBound : LeftBound;
         }
 
-        Debug.Log("Pointer Loc: " + PlayerPointer.localPosition.x);
+        // Debug.Log("Pointer Loc: " + PlayerPointer.localPosition.x);
 
         FishTarget_LeftEdge = FishTarget.localPosition.x - 70f;
         FishTarget_RightEdge = FishTarget.localPosition.x + 70f;
@@ -188,12 +192,18 @@ public class FishMiniGameController : MonoBehaviour
         {
             gameOver = true;
             StopAllCoroutines();
-            DeductFromBalance();
+            if (!deducted)
+            {
+                GameHandler.Instance.DeductFromBalance(currentPrice);
+            }
+
             ExitGameBtn.SetActive(true);
             PlayAgainBtn.SetActive(true);
             BidBtn.SetActive(false);
             StartGameBtn.SetActive(false);
-            DeliveryFish.text = (int.Parse(DeliveryFish.text) + 5).ToString();
+
+            fishCount += 5;
+            GameHandler.Instance.UpdateFishCounter(fishCount);
             CheckBalance();
         }
     }
@@ -228,17 +238,6 @@ public class FishMiniGameController : MonoBehaviour
         Debug.Log("Current Bid: " + currentPriceText.text);
     }
 
-    private void DeductFromBalance()
-    {
-        if (deducted) return;
-        int currentBalance = int.Parse(MoneyBalance.text);
-        int newBalance = (int)(currentBalance - currentPrice);
-        Debug.Log("New Balance: " + newBalance);
-        MoneyBalance.text = newBalance.ToString();
-
-        // Update fish count
-        deducted = true;
-    }
 
     private IEnumerator ChangeColorTemporarily(Color newColor, float duration)
     {

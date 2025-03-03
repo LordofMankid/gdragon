@@ -420,7 +420,7 @@ MonoBehaviour:
   FishTarget_LeftEdge: 0
   FishTarget_RightEdge: 0
   ProgressBarContainer: {fileID: 0}
-  scaleAmount: 40
+  scaleAmount: 50
   descalingSpeed: 15
   MoneyBalance: {fileID: 0}
   DeliveryFish: {fileID: 0}
@@ -436,8 +436,8 @@ MonoBehaviour:
   PlayAgainBtn: {fileID: 0}
   ExitGameBtn: {fileID: 0}
   PlayerPointer: {fileID: 0}
-  LeftBound: -760
-  RightBound: 760
+  LeftBound: -700
+  RightBound: 700
   InsufficientFunds: {fileID: 0}
 --- !u!1 &809655067608095141
 GameObject:
