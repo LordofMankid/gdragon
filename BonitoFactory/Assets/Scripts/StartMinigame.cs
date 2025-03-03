@@ -55,11 +55,7 @@ public class StartMinigame : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (MinigameInstance != null)
-        {
-            Destroy(MinigameInstance);
-            MinigameInstance = null;
-        }
+        MinigameInstance = null;
         CurrentView = null;
     }
 

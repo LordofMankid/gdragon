@@ -27,6 +27,11 @@ TagManager:
   - ReplayButton_FishAuction
   - LeaveButton_FishAuction
   - ProgressBarContainer_FishAuction
+  - StartGameBtn_FishAuction
+  - ExitGameBtn_FishAuction
+  - PlayAgainBtn_FishAuction
+  - BidBtn_FishAuction
+  - DeliveryFish
   layers:
   - Default
   - TransparentFX
