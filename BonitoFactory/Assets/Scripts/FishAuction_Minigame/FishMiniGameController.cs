@@ -74,6 +74,12 @@ public class FishMiniGameController : MonoBehaviour
         LeaveButton = GameObject.FindGameObjectWithTag("LeaveButton_FishAuction");
 
         EndGamePopup.SetActive(false);
+        Canvas canvas = GetComponent<Canvas>();
+        if (canvas != null)
+        {
+            canvas.overrideSorting = true;
+            canvas.sortingOrder = 150;
+        }
         gameOver = false;
 
         moneyBalance.text = "1000"; // Temporary
