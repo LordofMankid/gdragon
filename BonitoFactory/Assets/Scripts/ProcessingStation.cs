@@ -14,20 +14,21 @@ public class ProcessingStation : MonoBehaviour
 
     
     public bool processingItem = false;
-    public float timeLeft = 0f;
-    private GameObject currentItem;
-    private ProgressBarUILogic ProgressBar;
+    protected float elapsedTime = 0f;
+    protected GameObject currentItem;
+    protected ProgressBarUILogic ProgressBar;
 
-    private void Start()
+    // Information for player interaction
+    protected bool playerInRange = false; // Track if a player is in range
+    protected Transform interactingPlayer; // Reference to the interacting player
+
+    protected virtual void Start()
     {
         ProgressBar = ProgressBarTransform.GetComponent<ProgressBarUILogic>();
     }
-    // information for player interaction
-    private bool playerInRange = false;
-    private Transform interactingPlayer;
 
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player1") || other.CompareTag("Player2"))
         {
@@ -50,7 +51,7 @@ public class ProcessingStation : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    protected virtual void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player1") || other.CompareTag("Player2"))
         {
@@ -60,7 +61,7 @@ public class ProcessingStation : MonoBehaviour
     }
 
 
-    public void ProcessItem(GameObject ObjectToProcess)
+    public virtual void ProcessItem(GameObject ObjectToProcess)
     {
         if (processingItem) return;
 
@@ -69,18 +70,19 @@ public class ProcessingStation : MonoBehaviour
         {
             processingItem = true;
             currentItem = item.gameObject;
+            elapsedTime = 0f;
             StartCoroutine(ProcessItem());
         }
 
         Destroy(ObjectToProcess);
     }
 
-    private bool itemNameMatches(CookingItem item)
+    protected bool itemNameMatches(CookingItem item)
     {
         return inputPrefab != null && item.itemName == inputPrefab.GetComponent<CookingItem>().itemName;
     }
 
-    private IEnumerator ProcessItem()
+    protected virtual IEnumerator ProcessItem()
     {
         processingItem = true;
 
@@ -91,7 +93,6 @@ public class ProcessingStation : MonoBehaviour
         }
 
         float processTime = 3f; // Adjust this for different processing times
-        float elapsedTime = 0f;
 
         while (elapsedTime < processTime)
         {
@@ -115,7 +116,9 @@ public class ProcessingStation : MonoBehaviour
         {
             ProgressBar.Hide(); // Hide the progress bar when done
         }
+
         processingItem = false;
+        elapsedTime = 0f;
     }
 
 
