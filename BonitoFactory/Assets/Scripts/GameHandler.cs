@@ -6,9 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class GameHandler : MonoBehaviour
 {
-    public static int playerHealth; // Player health
-    public static int StartPlayerHealth = 100; // Default starting health
-    // public AudioMixer mixer; // Audio mixer for volume control
     public static float volumeLevel = 1.0f; // Stores current volume level
     public static GameHandler Instance; // Singleton instance
     public int money = 0;
@@ -45,13 +42,6 @@ public class GameHandler : MonoBehaviour
     {
         Debug.Log("Rolling Credits");
         SceneManager.LoadScene("Credits");
-    }
-
-    public void StartMinigame()
-    {
-        Debug.Log("Minigame started!");
-        // Add your minigame logic here
-        SceneManager.LoadScene("FishAuctionMinigame");
     }
 
     /* adjust the number of fish or you can pass in money and convert in GameHandler conversion instead, as long as 
@@ -117,7 +107,7 @@ public class GameHandler : MonoBehaviour
     // Resets all necessary static variables when starting a new game
     private void ResetGameVariables()
     {
-        playerHealth = StartPlayerHealth;
+        // playerHealth = StartPlayerHealth;
         // Add other static variables that need resetting here
     }
 }

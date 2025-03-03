@@ -3,16 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - PickUp
-  - Camera_P1
-  - Player2
-  - Camera_P2
-  - Player1
-  - PauseMenuSlider
-  - Pointer_FishAuction
-  - PauseMenu
-  - Log
+  tags: []
   layers:
   - Default
   - TransparentFX
