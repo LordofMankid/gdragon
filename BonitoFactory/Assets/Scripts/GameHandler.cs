@@ -8,8 +8,7 @@ public class GameHandler : MonoBehaviour
 {
     public static float volumeLevel = 1.0f; // Stores current volume level
     public static GameHandler Instance; // Singleton instance
-    public GameObject moneyBalance;
-    public int startingBalance = 1000;
+    public int money = 0;
     public GameObject deliveryPrefab;
 
     private void Awake()
@@ -24,8 +23,6 @@ public class GameHandler : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        moneyBalance = GameObject.FindGameObjectWithTag("MoneyBalance");
     }
 
     public void StartGame()
@@ -110,7 +107,7 @@ public class GameHandler : MonoBehaviour
     // Resets all necessary static variables when starting a new game
     private void ResetGameVariables()
     {
-        moneyBalance.GetComponent<TMPro.TextMeshProUGUI>().text = startingBalance.ToString();
+        playerHealth = StartPlayerHealth;
         // Add other static variables that need resetting here
     }
 }

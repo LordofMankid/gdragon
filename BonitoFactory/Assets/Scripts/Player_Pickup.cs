@@ -11,10 +11,6 @@ public class Player_Pickup : MonoBehaviour
 
     public bool IsAiming { get; private set; } = false; // tracks when player is aiming
     private bool canInteract = true;
-    private ProcessingStation nearbyStation = null; // Track the station in range
-
-
-
 
     private void Update()
     {
@@ -26,21 +22,20 @@ public class Player_Pickup : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && canInteract)
         {
-            if (nearbyStation != null && HasItem && !nearbyStation.processingItem) 
-            {
-                // Deposit item at the station instead of dropping
-                DepositToStation();
-            }
-            else if (!HasItem && PickUp_Object != null) 
+
+            if (!HasItem && PickUp_Object != null)
             {
                 PickUp();
+
             }
-            else if (HasItem) 
+            else if (HasItem)
             {
+                Debug.Log("dropping");
                 Drop();
             }
         }
     }
+
     private void HandleThrowInput()
     {
         if (HasItem && Input.GetKey(KeyCode.Q))
@@ -65,12 +60,6 @@ public class Player_Pickup : MonoBehaviour
 
             PickUp_Object = other.transform;
         }
-
-        ProcessingStation station = other.GetComponent<ProcessingStation>();
-        if (station != null)
-        {        
-            nearbyStation = station;
-        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -78,11 +67,6 @@ public class Player_Pickup : MonoBehaviour
         if (other.CompareTag("PickUp") && !HasItem)
         {
             PickUp_Object = null;
-        }
-
-        if (other.GetComponent<ProcessingStation>() != null)
-        {
-            nearbyStation = null;
         }
     }
 
@@ -157,17 +141,6 @@ public class Player_Pickup : MonoBehaviour
         canInteract = false;
         yield return new WaitForSeconds(0.2f); // Small delay to prevent instant dropping
         canInteract = true;
-    }
-
-    private void DepositToStation()
-    {
-        if (nearbyStation != null && HasItem)
-        {
-            nearbyStation.ProcessItem(PickUp_Object.gameObject);
-            HasItem = false;
-            PickUp_Object = null;
-            PickUp_ObjectRigidbody = null;
-        }
     }
 
 

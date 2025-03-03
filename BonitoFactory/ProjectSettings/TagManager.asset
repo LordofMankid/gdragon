@@ -3,35 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - PickUp
-  - Camera_P1
-  - Player2
-  - Camera_P2
-  - Player1
-  - PauseMenuSlider
-  - Pointer_FishAuction
-  - PauseMenu
-  - Ground
-  - Teleport
-  - PopupImagePlaceholder
-  - Teleporter-Home
-  - Teleporter-Market
-  - Target_FishAuction
-  - Timer_FishAuction
-  - LeftMarker_FishAuction
-  - RightMarker_FishAuction
-  - CurrentPrice_FishAuction
-  - MoneyBalance
-  - EndGameMenu_FishAuction
-  - ReplayButton_FishAuction
-  - LeaveButton_FishAuction
-  - ProgressBarContainer_FishAuction
-  - StartGameBtn_FishAuction
-  - ExitGameBtn_FishAuction
-  - PlayAgainBtn_FishAuction
-  - BidBtn_FishAuction
-  - DeliveryFish
+  tags: []
   layers:
   - Default
   - TransparentFX
