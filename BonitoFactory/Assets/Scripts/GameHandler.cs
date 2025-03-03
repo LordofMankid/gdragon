@@ -107,7 +107,7 @@ public class GameHandler : MonoBehaviour
     // Resets all necessary static variables when starting a new game
     private void ResetGameVariables()
     {
-        playerHealth = StartPlayerHealth;
+        // playerHealth = StartPlayerHealth;
         // Add other static variables that need resetting here
     }
 }
