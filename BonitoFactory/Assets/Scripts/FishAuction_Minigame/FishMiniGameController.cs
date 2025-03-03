@@ -58,9 +58,6 @@ public class FishMiniGameController : MonoBehaviour
 
     private void Awake()
     {
-        // LeftMarker = GameObject.FindGameObjectWithTag("LeftMarker_FishAuction").transform;
-        // RightMarker = GameObject.FindGameObjectWithTag("RightMarker_FishAuction").transform;
-
         targetX = RightBound;
         ProgressBarContainer = GameObject.FindGameObjectWithTag("ProgressBarContainer_FishAuction").transform;
         progressBarSpriteRenderer = ProgressBarContainer.GetComponentInChildren<SpriteRenderer>();
