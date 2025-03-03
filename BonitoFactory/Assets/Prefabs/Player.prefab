@@ -461,7 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff07e03a32eb64b46839ddb8e54c8e63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disabled: 0
+  cam: {fileID: 0}
   speed: 6
   turnSmoothTime: 0.1
   isP1: 1
@@ -496,6 +496,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PickUp_Hand: {fileID: 3773823063782088541}
   PickUp_Object: {fileID: 0}
+  Popup: {fileID: 9149212824594537009}
   ThrowForce: 12
 --- !u!1 &5188784630155572645
 GameObject:
@@ -585,14 +586,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7157872536798879717}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.03, y: 0.42, z: -0.13}
   m_LocalScale: {x: 0.08, y: 0.08, z: 0.08}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5459301902995139604}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4669606768176315798
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -23,7 +23,7 @@ public class ThrowableLogic : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (IsThrown && (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Untagged"))) // Ensure your floor has the tag "Ground"
+        if (IsThrown && collision.gameObject.CompareTag("Ground")) // Ensure your floor has the tag "Ground"
         {
             IsThrown = false;
             gameObject.tag = "PickUp";
