@@ -1,10 +1,10 @@
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class CurrencyManager : MonoBehaviour
 {
     public int currentCurrency = 100;
-    public Text currencyText;
+    public TextMeshProUGUI currencyText;
 
     void Start()
     {
