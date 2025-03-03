@@ -78,7 +78,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 20.48, y: 20.48}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -373,7 +373,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 840492767208369017}
-  - component: {fileID: 7081181921795850656}
+  - component: {fileID: 4619221103518605238}
   m_Layer: 0
   m_Name: FishAuctionUI
   m_TagString: Untagged
@@ -402,7 +402,7 @@ RectTransform:
   m_AnchoredPosition: {x: -6.013194, y: 12.399599}
   m_SizeDelta: {x: 1280, y: 720}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7081181921795850656
+--- !u!114 &4619221103518605238
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -411,7 +411,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 675676507696262800}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66f3598e4231cab4f817e87a78127988, type: 3}
+  m_Script: {fileID: 11500000, guid: bdad500e0c149004db33b80fea3e2e89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1000
@@ -420,7 +420,7 @@ MonoBehaviour:
   FishTarget_LeftEdge: 0
   FishTarget_RightEdge: 0
   ProgressBarContainer: {fileID: 0}
-  scaleAmount: 40
+  scaleAmount: 50
   descalingSpeed: 15
   MoneyBalance: {fileID: 0}
   DeliveryFish: {fileID: 0}
@@ -436,8 +436,8 @@ MonoBehaviour:
   PlayAgainBtn: {fileID: 0}
   ExitGameBtn: {fileID: 0}
   PlayerPointer: {fileID: 0}
-  LeftBound: -760
-  RightBound: 760
+  LeftBound: -700
+  RightBound: 700
   InsufficientFunds: {fileID: 0}
 --- !u!1 &809655067608095141
 GameObject:
@@ -934,7 +934,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2189002713904173339}
   - component: {fileID: 2074271790998894273}
-  - component: {fileID: 7629573424700346519}
   - component: {fileID: 6952286734545968022}
   m_Layer: 0
   m_Name: PlayerPointer
@@ -1011,27 +1010,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &7629573424700346519
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1589147033895464808}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.99999994, y: 0.99999994, z: 2.36}
-  m_Center: {x: 0, y: 0.21134095, z: 0}
 --- !u!54 &6952286734545968022
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1180,7 +1158,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7081181921795850656}
+      - m_Target: {fileID: 4619221103518605238}
         m_TargetAssemblyTypeName: FishMiniGameController, Assembly-CSharp
         m_MethodName: OnBidButtonClicked
         m_Mode: 1
@@ -1476,7 +1454,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 20.48, y: 20.48}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -2282,7 +2260,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7081181921795850656}
+      - m_Target: {fileID: 4619221103518605238}
         m_TargetAssemblyTypeName: FishMiniGameController, Assembly-CSharp
         m_MethodName: ResetGame
         m_Mode: 1
@@ -2512,7 +2490,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 20.48, y: 20.48}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -2822,7 +2800,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7081181921795850656}
+      - m_Target: {fileID: 4619221103518605238}
         m_TargetAssemblyTypeName: FishMiniGameController, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
@@ -2917,7 +2895,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 23.603092, y: 16.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -3181,7 +3159,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7081181921795850656}
+      - m_Target: {fileID: 4619221103518605238}
         m_TargetAssemblyTypeName: FishMiniGameController, Assembly-CSharp
         m_MethodName: ExitGame
         m_Mode: 1
@@ -3276,7 +3254,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 23.603092, y: 16.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
