@@ -1,17 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class ProcessingStation : MonoBehaviour
 {
-    // Start is called before the first frame update
     public GameObject inputPrefab;
     public GameObject outputPrefab;
+    public GameObject ProgressBarTransform;
 
+
+    
     public bool processingItem = false;
     public float timeLeft = 0f;
     private GameObject currentItem;
+    private ProgressBarUILogic ProgressBar;
 
+    private void Start()
+    {
+        ProgressBar = ProgressBarTransform.GetComponent<ProgressBarUILogic>();
+    }
     // information for player interaction
     private bool playerInRange = false;
     private Transform interactingPlayer;
@@ -61,6 +71,8 @@ public class ProcessingStation : MonoBehaviour
             currentItem = item.gameObject;
             StartCoroutine(ProcessItem());
         }
+
+        Destroy(ObjectToProcess);
     }
 
     private bool itemNameMatches(CookingItem item)
@@ -70,20 +82,39 @@ public class ProcessingStation : MonoBehaviour
 
     private IEnumerator ProcessItem()
     {
+        processingItem = true;
 
-        // Destroy the input item
-        Destroy(currentItem);
-        yield return new WaitForSeconds(3f); // Simulates cooking time
+        if (ProgressBar != null)
+        {
+            ProgressBar.Show();
+            ProgressBar.SetProgress(0);
+        }
 
+        float processTime = 3f; // Adjust this for different processing times
+        float elapsedTime = 0f;
 
+        while (elapsedTime < processTime)
+        {
+            elapsedTime += Time.deltaTime;
 
-        // Spawn the output item
+            if (ProgressBar != null)
+            {
+                ProgressBar.SetProgress(elapsedTime / processTime); // Update progress bar
+            }
+
+           
+            yield return null;
+        }
+
         if (outputPrefab != null)
         {
-            Debug.Log("creating item");
             Instantiate(outputPrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity);
         }
 
+        if (ProgressBar != null)
+        {
+            ProgressBar.Hide(); // Hide the progress bar when done
+        }
         processingItem = false;
     }
 

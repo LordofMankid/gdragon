@@ -1,7 +1,7 @@
 using Cinemachine;
 using UnityEngine;
 
-public class DynamicCameraManager : MonoBehaviour
+public class CameraManager : MonoBehaviour
 {
     public Transform player1;
     public Transform player2;
@@ -15,8 +15,18 @@ public class DynamicCameraManager : MonoBehaviour
     public float fixedOrthographicSize = 5f; // If using Orthographic mode
     public GameObject Divider;
 
+    public static CameraManager Instance;
+
     private bool isSplitScreen = false;
 
+
+    public static event System.Action OnSplitScreenEnabled; // Event for split-screen enabled
+    public static event System.Action OnSplitScreenDisabled; // Event for split-screen disabled
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     void Start()
     {
         EnableSharedCamera();
@@ -59,6 +69,8 @@ public class DynamicCameraManager : MonoBehaviour
             mainCamera.fieldOfView = fixedFOV;
             mainCameraB.fieldOfView = fixedFOV;
         }
+        // notify listeners that split-screen is enabled
+        OnSplitScreenEnabled?.Invoke();
     }
 
     void EnableSharedCamera()
@@ -84,5 +96,8 @@ public class DynamicCameraManager : MonoBehaviour
             mainCamera.fieldOfView = fixedFOV;
             mainCameraB.fieldOfView = fixedFOV;
         }
+
+        // notify listeners that split-screen is disabled
+        OnSplitScreenDisabled?.Invoke();
     }
 }

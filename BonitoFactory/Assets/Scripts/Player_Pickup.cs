@@ -28,7 +28,6 @@ public class Player_Pickup : MonoBehaviour
         {
             if (nearbyStation != null && HasItem && !nearbyStation.processingItem) 
             {
-                Debug.Log("hi");
                 // Deposit item at the station instead of dropping
                 DepositToStation();
             }
