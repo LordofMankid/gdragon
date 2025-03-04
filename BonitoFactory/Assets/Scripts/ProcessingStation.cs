@@ -71,9 +71,10 @@ public class ProcessingStation : MonoBehaviour
             currentItem = item.gameObject;
             elapsedTime = 0f;
             StartCoroutine(ProcessItem());
+            Destroy(ObjectToProcess);
         }
 
-        Destroy(ObjectToProcess);
+
     }
 
     protected bool itemNameMatches(CookingItem item)

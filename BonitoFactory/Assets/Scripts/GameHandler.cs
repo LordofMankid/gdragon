@@ -89,6 +89,12 @@ public class GameHandler : MonoBehaviour
         moneyBalance.text = newBalance.ToString();
     }
 
+    public void AddToBalance(float amount)
+    {
+        float newBalance = float.Parse(moneyBalance.text) + amount;
+        moneyBalance.text = newBalance.ToString();
+    }
+
     /*
     *   Read from money balance
     */

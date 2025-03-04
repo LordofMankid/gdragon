@@ -13,6 +13,7 @@ public class Stall : MonoBehaviour
     // Information for player interaction
     protected bool playerInRange = false; // Track if a player is in range
     protected Transform interactingPlayer; // Reference to the interacting player
+    public bool ShopIsOpen = false;
 
     protected virtual void Start()
     {
@@ -39,4 +40,49 @@ public class Stall : MonoBehaviour
         }
     }
 
+    protected bool itemNameMatches(CookingItem item)
+    {
+        return inputPrefab != null && item.itemName == inputPrefab.GetComponent<CookingItem>().itemName;
+    }
+
+    // open stall menu with player that opened it
+    public void ToggleStallMenu(Player_Pickup player)
+    {
+        // checks for out of bounds and if the stall menu is in use
+        if (!playerInRange || !interactingPlayer.CompareTag(player.tag))
+        {
+            return;
+        }
+        else
+        {
+            ShopIsOpen = !ShopIsOpen;
+            if (ShopIsOpen)
+            {
+                ShopMenu.Show();
+            } else
+            {
+                ShopMenu.Hide();
+            }
+        }
+    }
+    
+    public void HandleSale()
+    {
+
+        Player_Pickup pickup = interactingPlayer.GetComponent<Player_Pickup>();
+
+        if (pickup != null)
+        {
+            if (pickup == null || !pickup.HasItem)
+            {
+                Debug.Log("No player or item to sell.");
+                return;
+            }
+        }
+
+        pickup.deleteItem();
+
+
+        GameHandler.Instance.AddToBalance(500);
+    }
 }

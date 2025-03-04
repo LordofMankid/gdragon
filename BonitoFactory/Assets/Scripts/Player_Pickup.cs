@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Security.Cryptography.X509Certificates;
 public class Player_Pickup : MonoBehaviour
 {
     public Transform PickUp_Hand; // The hand where the object will be held
@@ -12,7 +13,7 @@ public class Player_Pickup : MonoBehaviour
     public bool IsAiming { get; private set; } = false; // tracks when player is aiming
     private bool canInteract = true;
     private ProcessingStation nearbyStation = null; // Track the station in range
-
+    private Stall nearbyStall = null;
 
 
 
@@ -35,10 +36,14 @@ public class Player_Pickup : MonoBehaviour
             {
                 PickUp();
             }
-            else if (HasItem) 
+            else if (nearbyStall != null && HasItem) 
+            {
+                nearbyStall.ToggleStallMenu(this);
+            } else if (HasItem)
             {
                 Drop();
             }
+            
         }
     }
     private void HandleThrowInput()
@@ -60,6 +65,7 @@ public class Player_Pickup : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
         if (other.CompareTag("PickUp") && !HasItem)
         {
 
@@ -70,6 +76,13 @@ public class Player_Pickup : MonoBehaviour
         if (station != null)
         {        
             nearbyStation = station;
+        }
+
+        Stall stall = other.GetComponent<Stall>();
+       
+        if (stall != null)
+        {
+            nearbyStall = stall;
         }
     }
 
@@ -84,6 +97,12 @@ public class Player_Pickup : MonoBehaviour
         {
             nearbyStation = null;
         }
+
+        if (other.GetComponent<Stall>() != null)
+        {
+            nearbyStall = null;
+        }
+
     }
 
     public void PickUp()
@@ -170,5 +189,11 @@ public class Player_Pickup : MonoBehaviour
         }
     }
 
-
+    public void deleteItem()
+    {
+        Destroy(PickUp_Object.gameObject);
+        HasItem = false;
+        PickUp_Object = null;
+        PickUp_ObjectRigidbody = null;
+    }
 }
