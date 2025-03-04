@@ -58,7 +58,7 @@ public class Stall : MonoBehaviour
             ShopIsOpen = !ShopIsOpen;
             if (ShopIsOpen)
             {
-                ShopMenu.Show();
+                ShopMenu.Show(player.CompareTag("Player1"));
             } else
             {
                 ShopMenu.Hide();
