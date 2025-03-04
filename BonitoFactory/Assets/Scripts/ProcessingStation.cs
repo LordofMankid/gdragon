@@ -35,7 +35,6 @@ public class ProcessingStation : MonoBehaviour
             interactingPlayer = other.transform;
         }
         ThrowableLogic thrownItem = other.gameObject.GetComponent<ThrowableLogic>();
-        Debug.Log("thrownItem is here");
         if (thrownItem != null && thrownItem.IsThrown) // Only handle thrown items
         {
             if (itemNameMatches(thrownItem.gameObject.GetComponent<CookingItem>()))

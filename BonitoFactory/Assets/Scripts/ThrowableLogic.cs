@@ -28,7 +28,6 @@ public class ThrowableLogic : MonoBehaviour
         throwDelay = true;
         yield return new WaitForSeconds(delay);
         throwDelay = false; // Re-enable pickup
-        Debug.Log("Pickup re-enabled");
     }
 
 
