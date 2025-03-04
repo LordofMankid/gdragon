@@ -8,7 +8,7 @@ public class ThrowableLogic : MonoBehaviour
     public bool IsGrounded { get; private set; } = false;
 
     private Rigidbody rb;
-
+    private bool throwDelay = false;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -16,22 +16,37 @@ public class ThrowableLogic : MonoBehaviour
 
     public void OnThrown()
     {
+        rb.isKinematic = false;
         IsThrown = true;
-        IsGrounded = false;
         gameObject.tag = "Untagged"; // Temporarily disable pickup
+
+        StartCoroutine(EnablePickupAfterDelay(0.2f)); // 1 second delay before pickup is re-enabled
     }
+
+    private IEnumerator EnablePickupAfterDelay(float delay)
+    {
+        throwDelay = true;
+        yield return new WaitForSeconds(delay);
+        throwDelay = false; // Re-enable pickup
+        Debug.Log("Pickup re-enabled");
+    }
+
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (IsThrown && (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Untagged"))) // Ensure your floor has the tag "Ground"
+
+        if (IsThrown && (collision.gameObject.CompareTag("Player1") || collision.gameObject.CompareTag("Player2")) ) // Ensure your floor has the tag "Ground"
         {
-            IsThrown = false;
+            if (throwDelay)
+            {
+                return;
+            }
             gameObject.tag = "PickUp";
-            IsGrounded = true;
+            AutoPickup();
+            IsThrown = false;
         } else
         {
             gameObject.tag = "PickUp";
-            AutoPickup();
             IsThrown = false;
         }
     }
@@ -58,8 +73,13 @@ public class ThrowableLogic : MonoBehaviour
         if (nearestPlayer != null)
         {
             Player_Pickup playerPickup = nearestPlayer.GetComponent<Player_Pickup>();
-            if (playerPickup != null && !playerPickup.HasItem && IsThrown)
+
+            if (playerPickup != null && !playerPickup.HasItem && IsThrown && !throwDelay)
             {
+                rb.velocity = Vector3.zero;  // Stop any movement
+                rb.angularVelocity = Vector3.zero; // Stop rotation
+                rb.isKinematic = true;
+                rb.detectCollisions = false;
                 playerPickup.PickUp_Object = transform;
                 playerPickup.PickUp();
             }

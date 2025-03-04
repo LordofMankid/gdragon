@@ -35,7 +35,7 @@ public class ProcessingStation : MonoBehaviour
             interactingPlayer = other.transform;
         }
         ThrowableLogic thrownItem = other.gameObject.GetComponent<ThrowableLogic>();
-
+        Debug.Log("thrownItem is here");
         if (thrownItem != null && thrownItem.IsThrown) // Only handle thrown items
         {
             if (itemNameMatches(thrownItem.gameObject.GetComponent<CookingItem>()))
@@ -80,7 +80,7 @@ public class ProcessingStation : MonoBehaviour
     protected bool itemNameMatches(CookingItem item)
     {
         Debug.Log(item.itemName);
-        return inputPrefab != null && item.itemName == inputPrefab.GetComponent<CookingItem>().itemName + "(Clone)";
+        return inputPrefab != null && item.itemName == inputPrefab.GetComponent<CookingItem>().itemName + "(Clone)" || item.itemName == inputPrefab.GetComponent<CookingItem>().itemName;
     }
 
     protected virtual IEnumerator ProcessItem()

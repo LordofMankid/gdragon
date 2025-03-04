@@ -105,20 +105,30 @@ public class Player_Pickup : MonoBehaviour
 
     }
 
+
+
+
     public void PickUp()
     {
         if (PickUp_Object == null) return;
 
-        // Attach the object to the hand
-        PickUp_Object.position = PickUp_Hand.position;
-        PickUp_Object.parent = PickUp_Hand;
+    
 
         // Disable physics while holding the object
         PickUp_ObjectRigidbody = PickUp_Object.GetComponent<Rigidbody>();
+
+
         if (PickUp_ObjectRigidbody != null)
         {
+            PickUp_ObjectRigidbody.velocity = Vector3.zero;  // Stop any movement
+            PickUp_ObjectRigidbody.angularVelocity = Vector3.zero; // Stop rotation
             PickUp_ObjectRigidbody.isKinematic = true;
+            PickUp_ObjectRigidbody.detectCollisions = false;
         }
+
+        // Attach the object to the hand
+        PickUp_Object.position = PickUp_Hand.position;
+        PickUp_Object.parent = PickUp_Hand;
 
         HasItem = true;
     }
@@ -130,10 +140,15 @@ public class Player_Pickup : MonoBehaviour
         // Detach the object from the hand
         PickUp_Object.parent = null;
 
+
         // Re-enable physics
         if (PickUp_ObjectRigidbody != null)
         {
+            
             PickUp_ObjectRigidbody.isKinematic = false;
+            PickUp_ObjectRigidbody.detectCollisions = true; // Re-enable physics
+            PickUp_ObjectRigidbody.velocity = Vector3.zero;  // Prevent unintended forces
+            PickUp_ObjectRigidbody.angularVelocity = Vector3.zero;
             PickUp_ObjectRigidbody.AddForce(transform.forward * 5, ForceMode.Impulse);
         }
 
@@ -150,10 +165,15 @@ public class Player_Pickup : MonoBehaviour
         // Detach the object from the hand
         PickUp_Object.parent = null;
 
+        // Disable physics while holding the object
+        PickUp_ObjectRigidbody = PickUp_Object.GetComponent<Rigidbody>();
         // Re-enable physics and apply stronger throw force
         if (PickUp_ObjectRigidbody != null)
         {
             PickUp_ObjectRigidbody.isKinematic = false;
+            PickUp_ObjectRigidbody.detectCollisions = true; // Re-enable physics
+            PickUp_ObjectRigidbody.velocity = Vector3.zero;  // Prevent unintended forces
+            PickUp_ObjectRigidbody.angularVelocity = Vector3.zero;
             float upwardForceRatio = 0.2f;
             Vector3 throwDirection = transform.forward + Vector3.up * upwardForceRatio;
             PickUp_ObjectRigidbody.AddForce(throwDirection * ThrowForce, ForceMode.Impulse);
@@ -161,6 +181,8 @@ public class Player_Pickup : MonoBehaviour
 
         // Optionally, add logic to make the object pickable by other players
         //StartCoroutine(MakeObjectPickableAfterDelay(PickUp_Object));
+
+        //StartCoroutine(StartInteractionCooldown());
         ThrowableLogic thrownObject = PickUp_Object.GetComponent<ThrowableLogic>();
         if (thrownObject != null)
         {
