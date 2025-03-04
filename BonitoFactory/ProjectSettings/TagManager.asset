@@ -35,6 +35,7 @@ TagManager:
   - InsufficientFunds
   - MarketSpawn
   - HomeSpawn
+  - LogCounter
   layers:
   - Default
   - TransparentFX
