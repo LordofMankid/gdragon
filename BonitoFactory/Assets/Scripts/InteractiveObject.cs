@@ -40,12 +40,18 @@ public class InteractiveObject : MonoBehaviour
 
     void ShowPopup()
     {
-        PopupObject.gameObject.SetActive(true);
+        if (PopupObject != null)
+        {
+            PopupObject.gameObject.SetActive(true);
+        }
     }
 
     void HidePopup()
     {
-        PopupObject.gameObject.SetActive(false);
+        if (PopupObject != null)
+        {
+            PopupObject.gameObject.SetActive(false);
+        }
     }
 
 }
