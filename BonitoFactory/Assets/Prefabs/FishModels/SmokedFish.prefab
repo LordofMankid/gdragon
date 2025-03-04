@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 4471997622669823457}
   - component: {fileID: 2888537884097177480}
   m_Layer: 0
-  m_Name: BoiledFish
+  m_Name: SmokedFish
   m_TagString: PickUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3522955778539423533, guid: 37f8d2003ffdb7f45b17fe93bfc06f41, type: 3}
+  - {fileID: 2100000, guid: eb809a2c0fa146d4fb9c23e5d970fbea, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e8e9a3b57bdb84d91b51ef3eb9532c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: BoiledFish
+  itemName: SmokedFish
 --- !u!114 &2888537884097177480
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e8e9a3b57bdb84d91b51ef3eb9532c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: RawFish
+  itemName: Log
 --- !u!114 &2888537884097177480
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -27,10 +27,18 @@ public class Player_Pickup : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && canInteract)
         {
-            if (nearbyStation != null && HasItem && !nearbyStation.processingItem) 
+            if (nearbyStation != null && HasItem) 
             {
-                // Deposit item at the station instead of dropping
-                DepositToStation();
+                CookingItem item = PickUp_Object.GetComponent<CookingItem>();
+                if (item != null && item.itemName == "Log") // Check if the item is a log
+                {
+                    // Always allow logs to be deposited, even if processingItem is true
+                    DepositToStation();
+                }
+                else if (!nearbyStation.processingItem) // Only deposit non-log items if not processing
+                {
+                    DepositToStation();
+                }
             }
             else if (!HasItem && PickUp_Object != null) 
             {
