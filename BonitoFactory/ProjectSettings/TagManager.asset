@@ -32,6 +32,9 @@ TagManager:
   - PlayAgainBtn_FishAuction
   - BidBtn_FishAuction
   - DeliveryFish
+  - InsufficientFunds
+  - MarketSpawn
+  - HomeSpawn
   layers:
   - Default
   - TransparentFX

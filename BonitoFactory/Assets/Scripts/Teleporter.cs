@@ -4,22 +4,26 @@ using UnityEngine.UIElements;
 public class Teleporter : MonoBehaviour
 {
     public GameObject playerController;
-    public Transform playerPosition;
+    public Transform player;
     public bool inTriggerRange = false;
 
     [SerializeField] Transform MarketTeleporter;
     [SerializeField] Transform HomeTeleporter;
+    [SerializeField] Transform spawnLocation;
+
 
     void Awake()
     {
         if (gameObject.CompareTag("Teleporter-Home"))
         {
             HomeTeleporter = gameObject.transform;
+            spawnLocation = GameObject.FindGameObjectWithTag("MarketSpawn").transform;
             MarketTeleporter = GameObject.FindGameObjectWithTag("Teleporter-Market").transform;
         }
         else
         {
             HomeTeleporter = GameObject.FindGameObjectWithTag("Teleporter-Home").transform;
+            spawnLocation = GameObject.FindGameObjectWithTag("HomeSpawn").transform;
             MarketTeleporter = gameObject.transform;
         }
     }
@@ -30,7 +34,7 @@ public class Teleporter : MonoBehaviour
         if (other.CompareTag("Player1") || other.CompareTag("Player2"))
         {
             inTriggerRange = true;
-            playerPosition = other.transform;
+            player = other.transform;
             playerController = other.gameObject;
         }
     }
@@ -41,14 +45,14 @@ public class Teleporter : MonoBehaviour
         if (other.CompareTag("Player1") || other.CompareTag("Player2"))
         {
             inTriggerRange = false;
-            playerPosition = null;
+            player = null;
             playerController = null;
         }
     }
 
     void Update()
     {
-        if (inTriggerRange && playerPosition && playerController)
+        if (inTriggerRange && player && playerController)
         {
             // Debug.Log("Player in teleport zone");
             if (Input.GetKey(KeyCode.M) && gameObject.CompareTag("Teleporter-Home"))
@@ -77,7 +81,7 @@ public class Teleporter : MonoBehaviour
         popupField.SetActive(false);
         playerController.SetActive(false);
         yield return null;
-        playerPosition.position = destination.position + new Vector3(5f, 0, 5f);
+        player.position = spawnLocation.position;
         yield return null;
         playerController.SetActive(true);
     }

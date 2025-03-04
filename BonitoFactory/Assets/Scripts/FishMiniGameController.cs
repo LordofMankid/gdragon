@@ -69,8 +69,6 @@ public class FishMiniGameController : MonoBehaviour
 
         currentPriceText = GameObject.FindGameObjectWithTag("CurrentPrice_FishAuction").GetComponent<TextMeshProUGUI>();
         Timer = GameObject.FindGameObjectWithTag("Timer_FishAuction").GetComponent<TextMeshProUGUI>();
-        // MoneyBalance = GameObject.FindGameObjectWithTag("MoneyBalance").GetComponent<TextMeshProUGUI>();
-        // DeliveryFish = GameObject.FindGameObjectWithTag("DeliveryFish").GetComponent<TextMeshProUGUI>();
         FishTarget = GameObject.FindGameObjectWithTag("Target_FishAuction").transform;
 
         StartGameBtn = GameObject.FindGameObjectWithTag("StartGameBtn_FishAuction");
