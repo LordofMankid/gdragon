@@ -11,7 +11,7 @@ public class ProcessingStation : MonoBehaviour
     public GameObject ProgressBarTransform;
 
 
-    
+
     public bool processingItem = false;
     protected float elapsedTime = 0f;
     protected GameObject currentItem;
@@ -79,7 +79,8 @@ public class ProcessingStation : MonoBehaviour
 
     protected bool itemNameMatches(CookingItem item)
     {
-        return inputPrefab != null && item.itemName == inputPrefab.GetComponent<CookingItem>().itemName;
+        Debug.Log(item.itemName);
+        return inputPrefab != null && item.itemName == inputPrefab.GetComponent<CookingItem>().itemName + "(Clone)";
     }
 
     protected virtual IEnumerator ProcessItem()
@@ -103,12 +104,13 @@ public class ProcessingStation : MonoBehaviour
                 ProgressBar.SetProgress(elapsedTime / processTime); // Update progress bar
             }
 
-           
+
             yield return null;
         }
 
         if (outputPrefab != null)
         {
+            Debug.Log("Output Type is not null!");
             Instantiate(outputPrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity);
         }
 
