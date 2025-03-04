@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.38884062, g: 0.72838765, b: 0.7342317, a: 1}
+  m_IndirectSpecularColor: {r: 0.3886733, g: 0.7280866, b: 0.7325946, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3175,7 +3175,7 @@ PrefabInstance:
     - target: {fileID: 8276337950082159820, guid: a90f7589e7f2530448edb73198c94bd1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 265.54
+      value: 257.92
       objectReference: {fileID: 0}
     - target: {fileID: 8276337950082159820, guid: a90f7589e7f2530448edb73198c94bd1,
         type: 3}
@@ -3185,7 +3185,7 @@ PrefabInstance:
     - target: {fileID: 8276337950082159820, guid: a90f7589e7f2530448edb73198c94bd1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 87.39
+      value: 86.86
       objectReference: {fileID: 0}
     - target: {fileID: 8276337950082159820, guid: a90f7589e7f2530448edb73198c94bd1,
         type: 3}
@@ -4953,7 +4953,7 @@ PrefabInstance:
     - target: {fileID: 6197340355976809154, guid: eedc52e8cf05ff44c9721017f2e81160,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 239.3
+      value: 231.68001
       objectReference: {fileID: 0}
     - target: {fileID: 6197340355976809154, guid: eedc52e8cf05ff44c9721017f2e81160,
         type: 3}
@@ -4963,7 +4963,7 @@ PrefabInstance:
     - target: {fileID: 6197340355976809154, guid: eedc52e8cf05ff44c9721017f2e81160,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 51.71
+      value: 51.18
       objectReference: {fileID: 0}
     - target: {fileID: 6197340355976809154, guid: eedc52e8cf05ff44c9721017f2e81160,
         type: 3}
@@ -5021,7 +5021,16 @@ PrefabInstance:
       value: 21.56
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 733990370936364676, guid: eedc52e8cf05ff44c9721017f2e81160, type: 3}
+    - {fileID: 8466751180163135299, guid: eedc52e8cf05ff44c9721017f2e81160, type: 3}
+    - {fileID: 1455946902234238789, guid: eedc52e8cf05ff44c9721017f2e81160, type: 3}
+    - {fileID: 3286791396335235035, guid: eedc52e8cf05ff44c9721017f2e81160, type: 3}
+    - {fileID: 9185341249566288890, guid: eedc52e8cf05ff44c9721017f2e81160, type: 3}
+    - {fileID: 2872839157209346756, guid: eedc52e8cf05ff44c9721017f2e81160, type: 3}
+    - {fileID: 1245419515404893729, guid: eedc52e8cf05ff44c9721017f2e81160, type: 3}
+    - {fileID: 8400330441748250816, guid: eedc52e8cf05ff44c9721017f2e81160, type: 3}
+    - {fileID: 2909347598092690333, guid: eedc52e8cf05ff44c9721017f2e81160, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eedc52e8cf05ff44c9721017f2e81160, type: 3}
