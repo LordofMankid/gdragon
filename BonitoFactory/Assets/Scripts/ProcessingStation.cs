@@ -40,6 +40,7 @@ public class ProcessingStation : MonoBehaviour
             if (itemNameMatches(thrownItem.gameObject.GetComponent<CookingItem>()))
             {
                 ProcessItem(thrownItem.gameObject); // Process it
+                Destroy(thrownItem.gameObject);
             }
             else
             {
@@ -59,9 +60,9 @@ public class ProcessingStation : MonoBehaviour
     }
 
 
-    public virtual void ProcessItem(GameObject ObjectToProcess)
+    public virtual bool ProcessItem(GameObject ObjectToProcess)
     {
-        if (processingItem) return;
+        if (processingItem) return false;
 
         CookingItem item = ObjectToProcess.GetComponent<CookingItem>();
         if (item != null && itemNameMatches(item))
@@ -70,8 +71,19 @@ public class ProcessingStation : MonoBehaviour
             currentItem = item.gameObject;
             elapsedTime = 0f;
             StartCoroutine(ProcessItem());
-            Destroy(ObjectToProcess);
+            // Clear references to the processed item
+            if (interactingPlayer != null)
+            {
+                Player_Pickup playerPickup = interactingPlayer.GetComponent<Player_Pickup>();
+                if (playerPickup != null)
+                {
+                    playerPickup.deleteItem(); // Clear the held item reference in the player script
+                }
+            }
+            return true;
         }
+
+        return false;
 
 
     }

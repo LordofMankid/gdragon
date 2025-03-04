@@ -34,14 +34,11 @@ public class ChoppingStation : ProcessingStation
         processingItem = true;
         float processTime = 3f; // Adjust this for different processing times
 
-
         if (ProgressBar != null)
         {
             ProgressBar.Show();
             ProgressBar.SetProgress(elapsedTime / processTime); // Set progress based on elapsed time
         }
-
-
 
         while (elapsedTime < processTime)
         {

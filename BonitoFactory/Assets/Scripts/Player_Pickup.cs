@@ -212,7 +212,11 @@ public class Player_Pickup : MonoBehaviour
     {
         if (nearbyStation != null && HasItem)
         {
-            nearbyStation.ProcessItem(PickUp_Object.gameObject);
+            if (!nearbyStation.ProcessItem(PickUp_Object.gameObject))
+            {
+                return;
+            }
+            Debug.Log("Depositing");
             HasItem = false;
             PickUp_Object = null;
             PickUp_ObjectRigidbody = null;

@@ -104,7 +104,7 @@ public class SmokerStation : ProcessingStation
         }
     }
 
-    public override void ProcessItem(GameObject ObjectToProcess)
+    public override bool ProcessItem(GameObject ObjectToProcess)
     {
         Debug.Log("yah");
         CookingItem item = ObjectToProcess.GetComponent<CookingItem>();
@@ -116,8 +116,10 @@ public class SmokerStation : ProcessingStation
         }
         else
         {
-            base.ProcessItem(ObjectToProcess); // Handle regular items using the base class logic
+            return base.ProcessItem(ObjectToProcess); // Handle regular items using the base class logic
         }
+
+        return true;
     }
 
     protected override IEnumerator ProcessItem()
