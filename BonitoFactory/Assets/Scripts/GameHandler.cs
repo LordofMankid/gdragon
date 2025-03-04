@@ -28,8 +28,8 @@ public class GameHandler : MonoBehaviour
             Destroy(gameObject);
         }
 
-        moneyBalance = GameObject.FindGameObjectWithTag("MoneyBalance").GetComponent<TextMeshProUGUI>();
-        deliveredFish = GameObject.FindGameObjectWithTag("DeliveryFish").GetComponent<TextMeshProUGUI>();
+        moneyBalance = GameObject.Find("MoneyBalance").GetComponent<TextMeshProUGUI>();
+        deliveredFish = GameObject.Find("DeliveryFish").GetComponent<TextMeshProUGUI>();
     }
 
     public void StartGame()

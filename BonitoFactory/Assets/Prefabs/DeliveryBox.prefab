@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe2996f4000baa04983a5a7c48d06d84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwableFishPrefab: {fileID: 8409925510682033020, guid: d819bd63f2d3cbb41a93c3e0d4baa47e,
+  throwableFishPrefab: {fileID: 4775997938837524642, guid: b903c3b191071e449ac3b832a5074efc,
     type: 3}
 --- !u!65 &9214624535550000774
 BoxCollider:

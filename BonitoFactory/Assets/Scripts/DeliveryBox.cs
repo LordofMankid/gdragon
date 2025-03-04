@@ -43,7 +43,7 @@ public class DeliveryBox : MonoBehaviour
         // Instantiate the throwable fish
         GameObject fish = Instantiate(throwableFishPrefab, transform.position + Vector3.up * 1f, Quaternion.identity);
 
-        // Assign it to the player’s hand
+        // Assign it to the playerï¿½s hand
         Player_Pickup playerPickup = player.GetComponent<Player_Pickup>();
         if (playerPickup != null && !playerPickup.HasItem)
         {
