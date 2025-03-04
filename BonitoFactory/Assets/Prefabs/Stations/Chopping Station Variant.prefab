@@ -113,7 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputPrefab: {fileID: 8409925510682033020, guid: 05aa9e3b515badf438f7761e36529646,
     type: 3}
-  outputPrefab: {fileID: 4359577274925432702, guid: 955a469c86d378e45b10dd1127ba61e9,
+  outputPrefab: {fileID: 4775997938837524642, guid: 1732d3e5c40a405459554e01c84650f1,
     type: 3}
   ProgressBarTransform: {fileID: 2541374280899223924}
   processingItem: 0

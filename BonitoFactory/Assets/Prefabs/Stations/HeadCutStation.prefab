@@ -17,13 +17,13 @@ PrefabInstance:
         type: 3}
       propertyPath: inputPrefab
       value: 
-      objectReference: {fileID: 8409925510682033020, guid: 63ff71f879bb2d046bb1c2c6ab880884,
+      objectReference: {fileID: 4775997938837524642, guid: b903c3b191071e449ac3b832a5074efc,
         type: 3}
     - target: {fileID: 489910726934607189, guid: ad2ddd5a5834c9745b3722ee78c1bcaa,
         type: 3}
       propertyPath: outputPrefab
       value: 
-      objectReference: {fileID: 8409925510682033020, guid: 05aa9e3b515badf438f7761e36529646,
+      objectReference: {fileID: 3488688106471044574, guid: 942bb3f44656e20489680b5b98d60517,
         type: 3}
     - target: {fileID: 1712224770287756864, guid: ad2ddd5a5834c9745b3722ee78c1bcaa,
         type: 3}
