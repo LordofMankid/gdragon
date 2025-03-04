@@ -1,0 +1,110 @@
+[33m16a8159[m[33m ([m[1;36mHEAD[m[33m, [m[1;35mrefs/stash[m[33m)[m HEAD@{0}: checkout: moving from last-stopping-point to 16a8159
+[33mc9b4179[m[33m ([m[1;31morigin/last-stopping-point[m[33m, [m[1;32mlast-stopping-point[m[33m)[m HEAD@{1}: reset: moving to HEAD
+[33mc9b4179[m[33m ([m[1;31morigin/last-stopping-point[m[33m, [m[1;32mlast-stopping-point[m[33m)[m HEAD@{2}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m73b9cc1[m HEAD@{3}: reset: moving to HEAD
+[33m73b9cc1[m HEAD@{4}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m725859d[m HEAD@{5}: commit: Minor updates v2
+[33m213c8b6[m HEAD@{6}: commit: Mission Complete: Buy Fish
+[33m1502c9c[m HEAD@{7}: pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+[33m159b0c6[m HEAD@{8}: commit: Adding woodminigame logic + prefabs
+[33md22adba[m HEAD@{9}: checkout: moving from main to last-stopping-point
+[33mc30ed25[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{10}: reset: moving to HEAD
+[33mc30ed25[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{11}: checkout: moving from last-stopping-point to main
+[33md22adba[m HEAD@{12}: reset: moving to HEAD
+[33md22adba[m HEAD@{13}: checkout: moving from main to last-stopping-point
+[33mc30ed25[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{14}: checkout: moving from last-stopping-point to main
+[33md22adba[m HEAD@{15}: checkout: moving from main to last-stopping-point
+[33mc30ed25[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{16}: reset: moving to HEAD
+[33mc30ed25[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{17}: checkout: moving from ba5abd59adfd5f133d618e068c718bc073713a6c to main
+[33mba5abd5[m HEAD@{18}: checkout: moving from main to ba5abd5
+[33mc30ed25[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{19}: checkout: moving from last-stopping-point to main
+[33md22adba[m HEAD@{20}: commit: Adding woodcutting minigame from main to last-stopping point
+[33m32ff272[m HEAD@{21}: checkout: moving from main to last-stopping-point
+[33mc30ed25[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{22}: checkout: moving from main to main
+[33mc30ed25[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{23}: checkout: moving from last-stopping-point to main
+[33m32ff272[m HEAD@{24}: checkout: moving from merge-branch to last-stopping-point
+[33m14c8086[m[33m ([m[1;31morigin/merge-branch[m[33m, [m[1;32mmerge-branch[m[33m)[m HEAD@{25}: checkout: moving from lc-main to merge-branch
+[33m56552ed[m[33m ([m[1;31morigin/lc-main[m[33m, [m[1;32mlc-main[m[33m)[m HEAD@{26}: checkout: moving from main to lc-main
+[33m56552ed[m[33m ([m[1;31morigin/lc-main[m[33m, [m[1;32mlc-main[m[33m)[m HEAD@{27}: pull: Fast-forward
+[33mba5abd5[m HEAD@{28}: checkout: moving from working-fish-auction to main
+[33m0809e0a[m[33m ([m[1;31morigin/working-fish-auction[m[33m, [m[1;32mworking-fish-auction[m[33m)[m HEAD@{29}: commit: Last Edits
+[33m9f3da19[m HEAD@{30}: checkout: moving from main to working-fish-auction
+[33mba5abd5[m HEAD@{31}: checkout: moving from working-fish-auction to main
+[33m9f3da19[m HEAD@{32}: commit: Recovered everything
+[33m4321aec[m HEAD@{33}: commit: Commented out playerHealth in GameHandler
+[33m6c198ad[m HEAD@{34}: commit: Reorganizing sprites
+[33m2b2b454[m HEAD@{35}: commit: Merge branch 'main' into working-fish-auction
+[33mc215e77[m HEAD@{36}: checkout: moving from working-fish-auction to working-fish-auction
+[33mc215e77[m HEAD@{37}: checkout: moving from prev-merge-branch to working-fish-auction
+[33m2097d48[m HEAD@{38}: commit: Removing this dummy branch
+[33m8010ce6[m HEAD@{39}: checkout: moving from 8010ce69c9d62d96ab6cdc0f38eeade71e694976 to prev-merge-branch
+[33m8010ce6[m HEAD@{40}: checkout: moving from working-fish-auction to 8010ce6
+[33mc215e77[m HEAD@{41}: merge merge-branch: Merge made by the 'ort' strategy.
+[33ma7141b6[m HEAD@{42}: checkout: moving from merge-branch to working-fish-auction
+[33m14c8086[m[33m ([m[1;31morigin/merge-branch[m[33m, [m[1;32mmerge-branch[m[33m)[m HEAD@{43}: reset: moving to HEAD
+[33m14c8086[m[33m ([m[1;31morigin/merge-branch[m[33m, [m[1;32mmerge-branch[m[33m)[m HEAD@{44}: checkout: moving from main to merge-branch
+[33mba5abd5[m HEAD@{45}: checkout: moving from merge-branch to main
+[33m14c8086[m[33m ([m[1;31morigin/merge-branch[m[33m, [m[1;32mmerge-branch[m[33m)[m HEAD@{46}: commit: Merged main into merge-branch
+[33m23e22ed[m HEAD@{47}: commit (merge): Merge branch 'main' into merge-branch
+[33m32ff272[m HEAD@{48}: checkout: moving from main to merge-branch
+[33mba5abd5[m HEAD@{49}: checkout: moving from merge-branch to main
+[33m32ff272[m HEAD@{50}: checkout: moving from working-fish-auction to merge-branch
+[33ma7141b6[m HEAD@{51}: checkout: moving from merge-branch to working-fish-auction
+[33m32ff272[m HEAD@{52}: commit: Minor changes
+[33m96aa802[m HEAD@{53}: checkout: moving from 96aa80219c8b6d96d1554a3c7806b555c708ca82 to merge-branch
+[33m96aa802[m HEAD@{54}: checkout: moving from working-fish-auction to 96aa802
+[33ma7141b6[m HEAD@{55}: commit: Update .gitignore
+[33m96aa802[m HEAD@{56}: reset: moving to HEAD
+[33m96aa802[m HEAD@{57}: checkout: moving from main to working-fish-auction
+[33mba5abd5[m HEAD@{58}: checkout: moving from working-fish-auction to main
+[33m96aa802[m HEAD@{59}: commit: Storing working fish minigame into new branch
+[33m64f0120[m HEAD@{60}: checkout: moving from main to working-fish-auction
+[33m64f0120[m HEAD@{61}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33mc34c762[m HEAD@{62}: commit: Modified Level1 UI
+[33meca72b7[m HEAD@{63}: reset: moving to eca72b7e9eb1996afd8c1c1ab9f6349eebf2d426
+[33m0c9acb5[m HEAD@{64}: commit: Modified LevelUI
+[33meca72b7[m HEAD@{65}: commit: Minor changes to FishAuctionPrefab
+[33m0cfb6b0[m HEAD@{66}: commit: Added general script to start a minigame
+[33m4b8d828[m HEAD@{67}: commit: Added updated PLAYERS prefab to Level1
+[33m0242329[m HEAD@{68}: commit: Created Fish Auction Minigame Prefab
+[33m5a9f5f9[m HEAD@{69}: commit: Finished Fish Auction Minigame
+[33m70a3005[m HEAD@{70}: commit: Fixed gameHandler configs auction minigame
+[33m2a0ae50[m HEAD@{71}: commit: Finished functionality of fish auction minigame (minus currency deduction)
+[33m8ef61c7[m HEAD@{72}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m5919819[m HEAD@{73}: commit: Added auction minigame scene
+[33mb04a55e[m HEAD@{74}: commit: Moved popup icon code to interactive object script
+[33m347a413[m HEAD@{75}: commit: Added teleporters
+[33m215f87f[m HEAD@{76}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33md444e6a[m HEAD@{77}: pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+[33m1387d27[m HEAD@{78}: commit: Added modular popup
+[33m9947159[m HEAD@{79}: commit: Minor changes to MainMenu and Credits
+[33mbb649da[m HEAD@{80}: checkout: moving from main-broken-v1 to main
+[33m0914e6f[m[33m ([m[1;31morigin/main-broken-v1[m[33m, [m[1;32mmain-broken-v1[m[33m)[m HEAD@{81}: commit: Add Teleporter
+[33mbb649da[m HEAD@{82}: checkout: moving from main to main-broken-v1
+[33mbb649da[m HEAD@{83}: commit: added main menu
+[33m7c49016[m HEAD@{84}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33me5851cc[m HEAD@{85}: reset: moving to HEAD
+[33me5851cc[m HEAD@{86}: checkout: moving from gameHandler-integration to main
+[33m3e04db3[m[33m ([m[1;31morigin/gameHandler-integration[m[33m, [m[1;32mgameHandler-integration[m[33m)[m HEAD@{87}: checkout: moving from main to gameHandler-integration
+[33me5851cc[m HEAD@{88}: reset: moving to HEAD
+[33me5851cc[m HEAD@{89}: checkout: moving from gameHandler-integration to main
+[33m3e04db3[m[33m ([m[1;31morigin/gameHandler-integration[m[33m, [m[1;32mgameHandler-integration[m[33m)[m HEAD@{90}: checkout: moving from main to gameHandler-integration
+[33me5851cc[m HEAD@{91}: reset: moving to HEAD
+[33me5851cc[m HEAD@{92}: commit: Current state of level 1
+[33mb97a190[m HEAD@{93}: checkout: moving from gameHandler-integration to main
+[33m3e04db3[m[33m ([m[1;31morigin/gameHandler-integration[m[33m, [m[1;32mgameHandler-integration[m[33m)[m HEAD@{94}: commit: Compiled into webgl + added to itch.io
+[33me7164ec[m HEAD@{95}: checkout: moving from main to gameHandler-integration
+[33m48971a9[m HEAD@{96}: reset: moving to HEAD
+[33m48971a9[m HEAD@{97}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33md33fdc0[m HEAD@{98}: commit: Update: Set up general home map layout
+[33m92fd9b2[m HEAD@{99}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m10ca558[m HEAD@{100}: reset: moving to HEAD
+[33m10ca558[m HEAD@{101}: commit: Station #1: Added the fish auction minigame mechanic
+[33mdc96868[m HEAD@{102}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m19c2811[m HEAD@{103}: checkout: moving from multiplayer-setup to main
+[33mb61497e[m[33m ([m[1;31morigin/multiplayer-setup[m[33m, [m[1;32mmultiplayer-setup[m[33m)[m HEAD@{104}: commit: Simplified player movement + fixed pickup script
+[33mc48656d[m HEAD@{105}: checkout: moving from main to multiplayer-setup
+[33m75588c2[m HEAD@{106}: reset: moving to HEAD
+[33m75588c2[m HEAD@{107}: commit: Add 3rd pov camera view + basic player movement
+[33m3c100d8[m HEAD@{108}: commit: Add LydiaChen_work scene
+[33m4123706[m HEAD@{109}: clone: from https://github.com/LordofMankid/gdragon.git
